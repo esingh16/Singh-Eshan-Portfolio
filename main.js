@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===========================
-  // Contact form (front‑end validation only)
+  // Contact form (Formspree)
   // ===========================
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
@@ -292,26 +292,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
       const name = document.getElementById("name")?.value.trim();
       const email = document.getElementById("emailInput")?.value.trim();
       const type = document.getElementById("type")?.value;
       const message = document.getElementById("message")?.value.trim();
 
       if (!name || !email || !type || !message) {
+        e.preventDefault();
         setFormStatus("Please fill in all fields.", "error");
         return;
       }
 
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        e.preventDefault();
         setFormStatus("Please provide a valid email address.", "error");
         return;
       }
 
-      // simulate success for now
-      setFormStatus("Thanks for reaching out! Your message has been queued.", "success");
-      contactForm.reset();
-      setTimeout(() => setFormStatus("", "info"), 4500);
+      // allow submit to Formspree
+      setFormStatus("Sending your message…", "info");
     });
   }
 });
