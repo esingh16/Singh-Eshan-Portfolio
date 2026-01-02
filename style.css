@@ -1008,6 +1008,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  align-items: center;
 }
 
 .project-tags span {
@@ -1016,6 +1017,19 @@ button {
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.85);
   border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.project-link {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.project-link:hover {
+  color: var(--text);
 }
 
 /* Projects responsive */
