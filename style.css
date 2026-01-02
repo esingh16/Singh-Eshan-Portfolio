@@ -557,8 +557,12 @@ button {
   margin-bottom: 0.85rem;
 }
 
-.hero-avatar i {
-  font-size: 1.8rem;
+/* your circular photo */
+.hero-avatar img.hero-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
 }
 
 .avatar-ring {
