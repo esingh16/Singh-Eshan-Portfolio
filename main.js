@@ -1,6 +1,3 @@
-// ===========================
-// DOM Ready
-// ===========================
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const navbar = document.querySelector(".navbar");
@@ -10,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
   const progressBar = document.getElementById("scrollProgressBar");
 
-  // ===========================
-  // Theme toggle (dark / light)
-  // ===========================
+  // Theme toggle
   const storedTheme = localStorage.getItem("eshan-theme");
   if (storedTheme === "light") {
     body.classList.add("light");
@@ -22,13 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!themeToggle) return;
     const icon = themeToggle.querySelector("i");
     if (!icon) return;
-    if (body.classList.contains("light")) {
-      icon.className = "fa-solid fa-sun";
-    } else {
-      icon.className = "fa-solid fa-moon";
-    }
+    icon.className = body.classList.contains("light")
+      ? "fa-solid fa-sun"
+      : "fa-solid fa-moon";
   }
-
   updateThemeIcon();
 
   if (themeToggle) {
@@ -40,9 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===========================
-  // Mobile menu toggle
-  // ===========================
+  // Mobile nav
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", () => {
       navToggle.classList.toggle("active");
@@ -59,9 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===========================
-  // Navbar scroll behavior & active link
-  // ===========================
+  // Active nav + scroll progress
   const sections = document.querySelectorAll("section[id]");
 
   function markActiveNav() {
@@ -86,7 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar?.classList.remove("scrolled");
     }
 
-    // scroll progress
     if (progressBar) {
       const doc = document.documentElement;
       const scrollHeight = doc.scrollHeight - doc.clientHeight;
@@ -97,12 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
     markActiveNav();
   });
 
-  // initial
   markActiveNav();
 
-  // ===========================
-  // Smooth scrolling
-  // ===========================
+  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
       const id = anchor.getAttribute("href");
@@ -115,9 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ===========================
-  // Typewriter effect
-  // ===========================
+  // Typewriter
   const typewriterEl = document.getElementById("typewriter");
   if (typewriterEl) {
     const roles = [
@@ -132,12 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function type() {
       const current = roles[roleIndex];
-      if (deleting) {
-        charIndex--;
-      } else {
-        charIndex++;
-      }
-
+      charIndex += deleting ? -1 : 1;
       typewriterEl.textContent = current.slice(0, charIndex);
 
       if (!deleting && charIndex === current.length) {
@@ -151,16 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
         roleIndex = (roleIndex + 1) % roles.length;
       }
 
-      const speed = deleting ? 45 : 95;
-      setTimeout(type, speed);
+      setTimeout(type, deleting ? 45 : 95);
     }
 
     setTimeout(type, 600);
   }
 
-  // ===========================
-  // Intersection reveal
-  // ===========================
+  // Reveal on scroll
   const revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
@@ -174,15 +148,12 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { threshold: 0.18 }
     );
-
     revealEls.forEach((el) => observer.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add("visible"));
   }
 
-  // ===========================
-  // Stats counter
-  // ===========================
+  // Metrics counter
   const metricEls = document.querySelectorAll(".metric-value");
   if (metricEls.length && "IntersectionObserver" in window) {
     const statsObserver = new IntersectionObserver(
@@ -191,16 +162,16 @@ document.addEventListener("DOMContentLoaded", () => {
           if (!entry.isIntersecting) return;
           const el = entry.target;
           const target = parseFloat(el.dataset.target || "0");
-          const decimals = el.dataset.target?.includes(".")
-            ? el.dataset.target.split(".")[1].length
-            : 0;
+          const decimals =
+            el.dataset.target && el.dataset.target.includes(".")
+              ? el.dataset.target.split(".")[1].length
+              : 0;
           animateNumber(el, target, decimals);
           statsObserver.unobserve(el);
         });
       },
       { threshold: 0.45 }
     );
-
     metricEls.forEach((el) => statsObserver.observe(el));
   }
 
@@ -222,9 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, stepTime);
   }
 
-  // ===========================
-  // Project tab filter
-  // ===========================
+  // Project filter
   const projectTabs = document.querySelectorAll(".project-tab");
   const projectCards = document.querySelectorAll(".project-card");
 
@@ -238,17 +207,13 @@ document.addEventListener("DOMContentLoaded", () => {
       projectCards.forEach((card) => {
         const category = card.dataset.category || "";
         const categories = category.split(/\s+/);
-
-        const show =
-          filter === "all" ? true : categories.includes(filter.toLowerCase());
+        const show = filter === "all" ? true : categories.includes(filter.toLowerCase());
         card.style.display = show ? "block" : "none";
       });
     });
   });
 
-  // ===========================
-  // Tilt effect for hero card
-  // ===========================
+  // Tilt hero card
   const tiltCard = document.querySelector(".tilt-card");
   if (tiltCard) {
     tiltCard.addEventListener("mousemove", (e) => {
@@ -273,9 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===========================
-  // Contact form (Formspree)
-  // ===========================
+  // Contact form (Formspree validation)
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
 
@@ -309,8 +272,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // allow submit to Formspree
       setFormStatus("Sending your message…", "info");
+      // allow submit to Formspree
     });
   }
 });
