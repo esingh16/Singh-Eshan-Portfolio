@@ -1,636 +1,1243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eshan Singh - Data Science & AI Engineer</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <span class="brand-name">Eshan Singh</span>
-            </div>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+/* ===========================
+   Global Styles & Reset
+   =========================== */
 
-    <!-- Home Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-background">
-            <div class="animated-gradient"></div>
-        </div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="greeting">Hello, I'm</div>
-                    <h1 class="hero-title">Eshan Singh</h1>
-                    <h2 class="hero-subtitle">Data Science & AI Engineer</h2>
-                    <p class="hero-description">
-                        Transforming data into actionable insights through advanced machine learning, 
-                        deep learning, and AI solutions. Specializing in predictive modeling, NLP, 
-                        and explainable AI with a track record of building innovative, real-world applications.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">
-                            <i class="fas fa-envelope"></i> Get In Touch
-                        </a>
-                        <a href="#projects" class="btn btn-secondary">
-                            <i class="fas fa-briefcase"></i> View Projects
-                        </a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">3.9</div>
-                            <div class="stat-label">GPA (MS)</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">8.98</div>
-                            <div class="stat-label">CGPA (BE)</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">Projects</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="image-wrapper">
-                        <div class="floating-icon icon-1"><i class="fas fa-brain"></i></div>
-                        <div class="floating-icon icon-2"><i class="fas fa-chart-line"></i></div>
-                        <div class="floating-icon icon-3"><i class="fas fa-database"></i></div>
-                        <div class="floating-icon icon-4"><i class="fas fa-robot"></i></div>
-                        <div class="profile-placeholder">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <a href="#about">
-                <i class="fas fa-chevron-down"></i>
-            </a>
-        </div>
-    </section>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Passionate about leveraging AI to solve complex problems</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3 class="content-title">Professional Summary</h3>
-                    <p class="about-description">
-                        Data Science and AI engineer proficient in Python, SQL, Pandas, NumPy, and ML/DL frameworks. 
-                        Skilled in end-to-end ML pipelines, feature engineering, model evaluation, NLP, RAG, and 
-                        vector embeddings. Developed predictive models including CNN digit classifiers, churn prediction, 
-                        disease prediction, and AI chatbots, generating actionable insights via statistical analysis, 
-                        visualization, and BI tools.
-                    </p>
-                    
-                    <div class="education-timeline">
-                        <h3 class="content-title">Education</h3>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-header">
-                                    <h4>Master of Science in Data Science</h4>
-                                    <span class="timeline-date">Aug 2025 - May 2027</span>
-                                </div>
-                                <p class="timeline-institution">University of Maryland, College Park, Maryland, USA</p>
-                                <p class="timeline-grade">GPA: 3.9 / 4.0</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <div class="timeline-header">
-                                    <h4>Bachelor of Engineering in AI & Data Science</h4>
-                                    <span class="timeline-date">Nov 2021 - Jun 2025</span>
-                                </div>
-                                <p class="timeline-institution">Dr D Y Patil Institute, SPPU University, Pune, India</p>
-                                <p class="timeline-grade">CGPA: 8.98 / 10 • Distinction & Honours in AI/ML</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skills-grid">
-                    <h3 class="content-title">Technical Skills</h3>
-                    <div class="skill-category">
-                        <h4><i class="fas fa-code"></i> Programming & Scripting</h4>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">NumPy</span>
-                            <span class="skill-tag">Pandas</span>
-                            <span class="skill-tag">Scikit-learn</span>
-                            <span class="skill-tag">TensorFlow</span>
-                            <span class="skill-tag">Keras</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h4><i class="fas fa-chart-bar"></i> Data Analytics & Visualization</h4>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Data Cleaning</span>
-                            <span class="skill-tag">EDA</span>
-                            <span class="skill-tag">Feature Engineering</span>
-                            <span class="skill-tag">Statistics</span>
-                            <span class="skill-tag">A/B Testing</span>
-                            <span class="skill-tag">Tableau</span>
-                            <span class="skill-tag">Power BI</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h4><i class="fas fa-brain"></i> Machine Learning & AI</h4>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Supervised Learning</span>
-                            <span class="skill-tag">Unsupervised Learning</span>
-                            <span class="skill-tag">Classification</span>
-                            <span class="skill-tag">Regression</span>
-                            <span class="skill-tag">Deep Learning</span>
-                            <span class="skill-tag">NLP</span>
-                            <span class="skill-tag">CNN</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h4><i class="fas fa-robot"></i> Advanced AI Techniques</h4>
-                        <div class="skills-tags">
-                            <span class="skill-tag">RAG</span>
-                            <span class="skill-tag">Generative AI</span>
-                            <span class="skill-tag">LangChains</span>
-                            <span class="skill-tag">Vector DBs</span>
-                            <span class="skill-tag">AI Agents</span>
-                            <span class="skill-tag">LIME</span>
-                            <span class="skill-tag">Explainable AI</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h4><i class="fas fa-tools"></i> Tools & Platforms</h4>
-                        <div class="skills-tags">
-                            <span class="skill-tag">Git/GitHub</span>
-                            <span class="skill-tag">Jupyter</span>
-                            <span class="skill-tag">Google Cloud</span>
-                            <span class="skill-tag">Firebase</span>
-                            <span class="skill-tag">Android Studio</span>
-                            <span class="skill-tag">Flask</span>
-                            <span class="skill-tag">Node.js</span>
-                            <span class="skill-tag">React</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+:root {
+  /* Color Palette */
+  --primary-color: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #818cf8;
+  --secondary-color: #8b5cf6;
+  --accent-color: #ec4899;
+  --success-color: #10b981;
 
-    <!-- Services Section -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Services & Expertise</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Comprehensive AI and Data Science solutions tailored to your needs</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3 class="service-title">Machine Learning & Predictive Modeling</h3>
-                    <p class="service-description">
-                        End-to-end ML pipeline development with advanced feature engineering, model evaluation, 
-                        and optimization. Expertise in classification, regression, and ensemble methods 
-                        (Random Forest, XGBoost) achieving 87-92% accuracy.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Custom ML Model Development</li>
-                        <li><i class="fas fa-check"></i> Feature Engineering & Selection</li>
-                        <li><i class="fas fa-check"></i> Model Evaluation & Optimization</li>
-                        <li><i class="fas fa-check"></i> Churn & Risk Prediction</li>
-                    </ul>
-                </div>
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-dark: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3 class="service-title">Natural Language Processing & AI Chatbots</h3>
-                    <p class="service-description">
-                        Advanced NLP solutions using NLTK, GPT models, and RAG for context-aware applications. 
-                        Real-time chatbot development with voice integration using Google Cloud Speech API 
-                        and Text-to-Speech capabilities.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> AI Chatbot Development</li>
-                        <li><i class="fas fa-check"></i> RAG & Vector Embeddings</li>
-                        <li><i class="fas fa-check"></i> Voice-Enabled Applications</li>
-                        <li><i class="fas fa-check"></i> Context-Aware Recommendations</li>
-                    </ul>
-                </div>
+  /* Text Colors */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-light: #9ca3af;
+  --text-white: #ffffff;
 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="service-title">Data Analytics & Visualization</h3>
-                    <p class="service-description">
-                        Comprehensive data analysis with statistical methods, EDA, and business intelligence. 
-                        Creating actionable insights through interactive dashboards using Tableau, Power BI, 
-                        and custom visualizations.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Exploratory Data Analysis</li>
-                        <li><i class="fas fa-check"></i> Statistical Analysis & A/B Testing</li>
-                        <li><i class="fas fa-check"></i> Interactive Dashboards</li>
-                        <li><i class="fas fa-check"></i> Business Intelligence Reporting</li>
-                    </ul>
-                </div>
+  /* Background Colors */
+  --bg-white: #ffffff;
+  --bg-light: #f9fafb;
+  --bg-gray: #f3f4f6;
+  --bg-dark: #1f2937;
 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="service-title">Explainable AI & Risk Prediction</h3>
-                    <p class="service-description">
-                        Transparent AI solutions with LIME and explainability techniques for credit risk, 
-                        fraud detection, and loan default prediction. Providing interpretable insights 
-                        for critical business decisions.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Explainable AI with LIME</li>
-                        <li><i class="fas fa-check"></i> Credit Risk Assessment</li>
-                        <li><i class="fas fa-check"></i> Fraud Detection Systems</li>
-                        <li><i class="fas fa-check"></i> Transparent Decision Support</li>
-                    </ul>
-                </div>
+  /* Spacing */
+  --section-padding: 100px 0;
+  --container-padding: 0 20px;
 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 class="service-title">Full-Stack AI Solutions</h3>
-                    <p class="service-description">
-                        Complete application development from backend APIs to frontend interfaces. 
-                        Experience with React, Node.js, Flask, MongoDB, and RESTful API design for 
-                        scalable AI-powered applications.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> End-to-End Application Development</li>
-                        <li><i class="fas fa-check"></i> RESTful API Architecture</li>
-                        <li><i class="fas fa-check"></i> Database Design & Management</li>
-                        <li><i class="fas fa-check"></i> Model Deployment & Integration</li>
-                    </ul>
-                </div>
+  /* Typography */
+  --font-primary: "Poppins", sans-serif;
+  --font-secondary: "Inter", sans-serif;
 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <h3 class="service-title">Healthcare AI & Prediction Systems</h3>
-                    <p class="service-description">
-                        Specialized healthcare solutions including disease prediction systems for 
-                        gastrointestinal and skin disorders. Multi-class classification with rigorous 
-                        statistical analysis and custom feature engineering.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Disease Prediction Models</li>
-                        <li><i class="fas fa-check"></i> Healthcare Data Analysis</li>
-                        <li><i class="fas fa-check"></i> FHIR Standards Integration</li>
-                        <li><i class="fas fa-check"></i> Patient Risk Assessment</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Showcasing innovation through real-world AI applications</p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card featured">
-                    <div class="project-badge">🏆 2nd Place Winner</div>
-                    <div class="project-header">
-                        <h3 class="project-title">Care Compass</h3>
-                        <div class="project-tags">
-                            <span class="tag">Health-Tech</span>
-                            <span class="tag">Full-Stack</span>
-                            <span class="tag">Hackathon</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Won 2nd Place at the Gemini Hackathon @ UMD. Developed a full-stack care coordination 
-                        platform using React and Node.js, leveraging FHIR standards for real-time risk assessment. 
-                        Architected RESTful APIs and implemented MongoDB database for high-volume concurrent patient 
-                        data management.
-                    </p>
-                    <ul class="project-highlights">
-                        <li><i class="fas fa-star"></i> Real-time patient risk assessment</li>
-                        <li><i class="fas fa-star"></i> Google Maps API integration for provider proximity</li>
-                        <li><i class="fas fa-star"></i> FHIR-compliant data management</li>
-                        <li><i class="fas fa-star"></i> High-performance concurrent processing</li>
-                    </ul>
-                    <div class="project-tech">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                        <span>FHIR</span>
-                        <span>Google Maps API</span>
-                    </div>
-                </div>
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Loan Default Risk Prediction</h3>
-                        <div class="project-tags">
-                            <span class="tag">Explainable AI</span>
-                            <span class="tag">FinTech</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Built a binary classification model using Gradient Boosting to estimate loan default 
-                        probability based on applicant financial history and behavioral features. Applied 
-                        explainable AI techniques like LIME to provide transparent risk insights.
-                    </p>
-                    <ul class="project-highlights">
-                        <li><i class="fas fa-check-circle"></i> Gradient Boosting classifier</li>
-                        <li><i class="fas fa-check-circle"></i> LIME for model interpretability</li>
-                        <li><i class="fas fa-check-circle"></i> Complex behavioral feature engineering</li>
-                        <li><i class="fas fa-check-circle"></i> Actionable credit approval insights</li>
-                    </ul>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>XGBoost</span>
-                        <span>LIME</span>
-                        <span>Scikit-learn</span>
-                    </div>
-                </div>
+html {
+  scroll-behavior: smooth;
+}
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Career Counselling AI App</h3>
-                        <div class="project-tags">
-                            <span class="tag">NLP</span>
-                            <span class="tag">Mobile App</span>
-                            <span class="tag">Published</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Developed an Android application with voice features using NLP, Google Cloud Speech API, 
-                        and GPT models. Implemented RAG for dynamic, context-aware career recommendations. 
-                        Published research paper in WRFER National Conference.
-                    </p>
-                    <ul class="project-highlights">
-                        <li><i class="fas fa-check-circle"></i> Voice-enabled career guidance</li>
-                        <li><i class="fas fa-check-circle"></i> RAG for context-aware recommendations</li>
-                        <li><i class="fas fa-check-circle"></i> ML models: Decision Trees, SVM, Random Forests</li>
-                        <li><i class="fas fa-check-circle"></i> Google Cloud Speech & Text-to-Speech API</li>
-                    </ul>
-                    <div class="project-tech">
-                        <span>Android</span>
-                        <span>NLP</span>
-                        <span>RAG</span>
-                        <span>GPT</span>
-                        <span>Google Cloud</span>
-                    </div>
-                </div>
+body {
+  font-family: var(--font-secondary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Disease Prediction System</h3>
-                        <div class="project-tags">
-                            <span class="tag">Healthcare</span>
-                            <span class="tag">ML</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Engineered a multi-class prediction system for gastrointestinal and skin disorders. 
-                        Applied rigorous statistical analysis and custom feature engineering before deploying 
-                        ensemble methods like Random Forest and XGBoost.
-                    </p>
-                    <ul class="project-highlights">
-                        <li><i class="fas fa-check-circle"></i> Multi-class disease classification</li>
-                        <li><i class="fas fa-check-circle"></i> Advanced feature engineering</li>
-                        <li><i class="fas fa-check-circle"></i> Ensemble methods optimization</li>
-                        <li><i class="fas fa-check-circle"></i> Statistical analysis pipelines</li>
-                    </ul>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>Random Forest</span>
-                        <span>XGBoost</span>
-                        <span>Pandas</span>
-                    </div>
-                </div>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Handwritten Digit Classification</h3>
-                        <div class="project-tags">
-                            <span class="tag">Deep Learning</span>
-                            <span class="tag">Computer Vision</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Built a classification system on MNIST dataset using KNN, SVM, and CNN architectures. 
-                        Implemented with TensorFlow, Keras, and Scikit-learn, achieving 87-92% accuracy across 
-                        different model architectures.
-                    </p>
-                    <ul class="project-highlights">
-                        <li><i class="fas fa-check-circle"></i> Multiple model comparison</li>
-                        <li><i class="fas fa-check-circle"></i> CNN architecture optimization</li>
-                        <li><i class="fas fa-check-circle"></i> 87-92% accuracy achieved</li>
-                        <li><i class="fas fa-check-circle"></i> Comprehensive model evaluation</li>
-                    </ul>
-                    <div class="project-tech">
-                        <span>TensorFlow</span>
-                        <span>Keras</span>
-                        <span>CNN</span>
-                        <span>Scikit-learn</span>
-                    </div>
-                </div>
+/* ===========================
+   Navigation Bar
+   =========================== */
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Bank Customer Churn Prediction</h3>
-                        <div class="project-tags">
-                            <span class="tag">Predictive Analytics</span>
-                            <span class="tag">Banking</span>
-                        </div>
-                    </div>
-                    <p class="project-description">
-                        Developed a churn prediction model using data preprocessing, feature engineering, and 
-                        ML classifiers. Performed exploratory data analysis with one-hot encoding and created 
-                        visualizations for actionable business insights.
-                    </p>
-                    <ul class="project-highlights">
-                        <li><i class="fas fa-check-circle"></i> Customer retention insights</li>
-                        <li><i class="fas fa-check-circle"></i> Advanced EDA and visualization</li>
-                        <li><i class="fas fa-check-circle"></i> One-hot encoding optimization</li>
-                        <li><i class="fas fa-check-circle"></i> Business-driven feature engineering</li>
-                    </ul>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>Pandas</span>
-                        <span>Matplotlib</span>
-                        <span>Scikit-learn</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+  transition: var(--transition-normal);
+}
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="certifications-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Certifications</h2>
-                <div class="title-underline"></div>
-            </div>
-            <div class="certifications-grid">
-                <div class="cert-card">
-                    <i class="fab fa-google"></i>
-                    <h4>Google Data Analytics Professional</h4>
-                </div>
-                <div class="cert-card">
-                    <i class="fab fa-google"></i>
-                    <h4>Google AI Essentials Professional</h4>
-                </div>
-                <div class="cert-card">
-                    <i class="fab fa-google"></i>
-                    <h4>Google Analytics Certificate</h4>
-                </div>
-                <div class="cert-card">
-                    <i class="fab fa-microsoft"></i>
-                    <h4>Career Essentials in Data Analysis</h4>
-                    <p>Microsoft & LinkedIn</p>
-                </div>
-                <div class="cert-card">
-                    <i class="fab fa-microsoft"></i>
-                    <h4>Microsoft Azure Machine Learning</h4>
-                </div>
-                <div class="cert-card">
-                    <i class="fab fa-python"></i>
-                    <h4>Python for Data Science</h4>
-                    <p>IBM</p>
-                </div>
-            </div>
-        </div>
-    </section>
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: var(--shadow-lg);
+}
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="title-underline"></div>
-                <p class="section-subtitle">Let's discuss how I can help bring your AI and data science projects to life</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h4>Location</h4>
-                        <p>College Park - 20740<br>Maryland, USA</p>
-                    </div>
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <h4>Email</h4>
-                        <p><a href="mailto:esingh16@umd.edu">esingh16@umd.edu</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <h4>Phone</h4>
-                        <p><a href="tel:2272591592">227-259-1592</a></p>
-                    </div>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form id="contactForm" class="contact-form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-submit">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
-                    <div id="formMessage" class="form-message"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 20px;
+}
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; 2026 Eshan Singh. All rights reserved.</p>
-                    <p class="footer-tagline">Transforming Data into Intelligence</p>
-                </div>
-                <div class="social-links">
-                    <a href="#" class="social-link" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="mailto:esingh16@umd.edu" class="social-link" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
+.nav-brand {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-    <script src="js/main.js"></script>
-</body>
-</html>
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  position: relative;
+  transition: var(--transition-normal);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: var(--transition-normal);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+/* ===========================
+   Hero Section
+   =========================== */
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.animated-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  opacity: 0.05;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-text {
+  animation: fadeInUp 1s ease;
+}
+
+.greeting {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-primary);
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-normal);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.btn-secondary {
+  background: var(--bg-white);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-color);
+  color: var(--text-white);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInRight 1s ease;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.profile-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-2xl);
+}
+
+.profile-placeholder i {
+  font-size: 150px;
+  color: var(--text-white);
+}
+
+.floating-icon {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: var(--bg-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-icon i {
+  font-size: 30px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.icon-1 {
+  top: 10%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.icon-2 {
+  bottom: 10%;
+  right: 5%;
+  animation-delay: 0.5s;
+}
+
+.icon-3 {
+  top: 50%;
+  left: -5%;
+  animation-delay: 1s;
+}
+
+.icon-4 {
+  bottom: 20%;
+  left: 10%;
+  animation-delay: 1.5s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator a {
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===========================
+   Section Headers
+   =========================== */
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: var(--gradient-primary);
+  margin: 1rem auto;
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   About Section
+   =========================== */
+
+.about-section {
+  padding: var(--section-padding);
+  background: var(--bg-light);
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.content-title {
+  font-family: var(--font-primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.about-description {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.education-timeline {
+  margin-top: 3rem;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 2rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+}
+
+.timeline-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 21px;
+  width: 2px;
+  height: calc(100% + 2rem);
+  background: linear-gradient(
+    180deg,
+    var(--primary-color) 0%,
+    transparent 100%
+  );
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.timeline-header h4 {
+  font-family: var(--font-primary);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.timeline-date {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.timeline-institution {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Skills grid */
+
+.skills-grid {
+  background: var(--bg-white);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+.skill-category {
+  margin-bottom: 2rem;
+}
+
+.skill-category:last-child {
+  margin-bottom: 0;
+}
+
+.skill-category h4 {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-category h4 i {
+  color: var(--primary-color);
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.5rem 1rem;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition-normal);
+  border: 1px solid transparent;
+}
+
+.skill-tag:hover {
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===========================
+   Services Section
+   =========================== */
+
+.services-section {
+  padding: var(--section-padding);
+  background: var(--bg-white);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: var(--bg-white);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
+  border: 1px solid var(--bg-gray);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition-normal);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-icon {
+  width: 70px;
+  height: 70px;
+  background: var(--gradient-primary);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.service-icon i {
+  font-size: 2rem;
+  color: var(--text-white);
+}
+
+.service-title {
+  font-family: var(--font-primary);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.service-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.service-features {
+  list-style: none;
+}
+
+.service-features li {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.service-features i {
+  color: var(--success-color);
+  font-size: 0.85rem;
+}
+
+/* ===========================
+   Projects Section
+   =========================== */
+
+.projects-section {
+  padding: var(--section-padding);
+  background: var(--bg-light);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: var(--bg-white);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
+  position: relative;
+  border: 1px solid var(--bg-gray);
+}
+
+.project-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.05) 0%,
+    rgba(118, 75, 162, 0.05) 100%
+  );
+  border: 2px solid var(--primary-light);
+}
+
+.project-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.project-header {
+  margin-bottom: 1.5rem;
+}
+
+.project-title {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-light);
+  color: var(--primary-color);
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--primary-light);
+}
+
+.project-description {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.project-highlights {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.project-highlights li {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.project-highlights i {
+  color: var(--primary-color);
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--bg-gray);
+}
+
+.project-tech span {
+  padding: 0.4rem 0.9rem;
+  background: var(--gradient-primary);
+  color: var(--text-white);
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* ===========================
+   Certifications Section
+   =========================== */
+
+.certifications-section {
+  padding: var(--section-padding);
+  background: var(--bg-white);
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.cert-card {
+  background: var(--bg-light);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: var(--transition-normal);
+  border: 1px solid var(--bg-gray);
+}
+
+.cert-card:hover {
+  background: var(--bg-white);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.cert-card i {
+  font-size: 3rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.cert-card h4 {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cert-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ===========================
+   Contact Section
+   =========================== */
+
+.contact-section {
+  padding: var(--section-padding);
+  background: var(--bg-light);
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-card {
+  background: var(--bg-white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: var(--transition-normal);
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.contact-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.contact-icon i {
+  font-size: 1.5rem;
+  color: var(--text-white);
+}
+
+.contact-card h4 {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.contact-card p {
+  color: var(--text-secondary);
+}
+
+.contact-card a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+.contact-card a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.contact-form-wrapper {
+  background: var(--bg-white);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.875rem;
+  border: 2px solid var(--bg-gray);
+  border-radius: 8px;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  transition: var(--transition-normal);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.btn-submit {
+  width: fit-content;
+}
+
+.form-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  display: none;
+}
+
+.form-message.success {
+  display: block;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+  border: 1px solid var(--success-color);
+}
+
+.form-message.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+
+.footer {
+  background: var(--bg-dark);
+  padding: 3rem 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-text {
+  color: var(--text-white);
+}
+
+.footer-text p {
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-white);
+  font-size: 1.2rem;
+  transition: var(--transition-normal);
+}
+
+.social-link:hover {
+  background: var(--gradient-primary);
+  transform: translateY(-3px);
+}
+
+/* ===========================
+   Responsive Design
+   =========================== */
+
+@media (max-width: 968px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+
+  .image-wrapper {
+    width: 300px;
+    height: 300px;
+  }
+
+  .profile-placeholder i {
+    font-size: 100px;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card.featured {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    background: var(--bg-white);
+    flex-direction: column;
+    gap: 0;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition-normal);
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-stats {
+    gap: 2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .services-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .image-wrapper {
+    width: 250px;
+    height: 250px;
+  }
+
+  .profile-placeholder i {
+    font-size: 80px;
+  }
+
+  .floating-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .floating-icon i {
+    font-size: 20px;
+  }
+}
