@@ -328,13 +328,6 @@
           </ul>
           <div class="project-tags">
             <span>React</span><span>Node.js</span><span>MongoDB</span><span>FHIR</span>
-            <!-- Add repo link when available -->
-            <!--
-            <a href="https://github.com/esingh16/care-compass" target="_blank"
-               rel="noopener noreferrer" class="project-link">
-              <i class="fa-brands fa-github"></i> Code
-            </a>
-            -->
           </div>
         </article>
 
@@ -355,7 +348,7 @@
         </article>
 
         <!-- Career Counselling -->
-        <article class="project-card reveal" data-category="nlp">
+        <article class="project-card reveal" data-category="nlp ml">
           <h3 class="project-title">Career Counselling Using AI</h3>
           <p class="project-meta">Android · NLP · RAG · Google Cloud</p>
           <p class="project-description">
@@ -564,17 +557,30 @@
         </div>
 
         <div class="contact-form-wrapper reveal">
-          <!-- For now this is front-end only; you can later attach Formspree or a serverless backend -->
-          <form id="contactForm" class="contact-form" autocomplete="off">
+          <!-- Formspree backend: change action URL to your own endpoint -->
+          <form
+            id="contactForm"
+            class="contact-form"
+            autocomplete="off"
+            action="https://formspree.io/f/xyzabcd"
+            method="POST"
+          >
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input id="name" type="text" placeholder="Your name" required />
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="emailInput">Email</label>
                 <input
                   id="emailInput"
+                  name="_replyto"
                   type="email"
                   placeholder="you@example.com"
                   required
@@ -584,7 +590,7 @@
 
             <div class="form-group">
               <label for="type">Project type</label>
-              <select id="type" required>
+              <select id="type" name="type" required>
                 <option value="">Select an option</option>
                 <option value="internship">Internship / Role</option>
                 <option value="project">Project Collaboration</option>
@@ -597,6 +603,7 @@
               <label for="message">Message</label>
               <textarea
                 id="message"
+                name="message"
                 rows="5"
                 placeholder="Share a brief about your problem, timeline, and data."
                 required
