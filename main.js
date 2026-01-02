@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===========================
-  // Contact form (front‑end only)
+  // Contact form (front‑end validation only)
   // ===========================
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
@@ -308,10 +308,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // simulate success
+      // simulate success for now
       setFormStatus("Thanks for reaching out! Your message has been queued.", "success");
       contactForm.reset();
-
       setTimeout(() => setFormStatus("", "info"), 4500);
     });
   }
