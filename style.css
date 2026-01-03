@@ -1,6 +1,6 @@
 /* ===========
-   Base & Theme
-   =========== */
+Base & Theme
+=========== */
 
 :root {
   --bg: #020617;
@@ -15,14 +15,11 @@
   --text-soft-2: #6b7280;
   --text-on-accent: #f9fafb;
   --danger: #ef4444;
-
   --radius-lg: 18px;
   --radius-xl: 24px;
   --radius-pill: 999px;
-
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.65);
   --shadow-subtle: 0 8px 25px rgba(15, 23, 42, 0.4);
-
   --nav-height: 72px;
   --transition-fast: 0.18s ease;
   --transition-med: 0.25s ease;
@@ -99,8 +96,8 @@ button {
 }
 
 /* ===========
-   Navbar
-   =========== */
+Navbar
+=========== */
 
 .navbar {
   position: fixed;
@@ -252,9 +249,11 @@ button {
 .nav-toggle.active span:nth-child(1) {
   transform: translateY(4px) rotate(45deg);
 }
+
 .nav-toggle.active span:nth-child(2) {
   opacity: 0;
 }
+
 .nav-toggle.active span:nth-child(3) {
   transform: translateY(-4px) rotate(-45deg);
 }
@@ -306,8 +305,8 @@ button {
 }
 
 /* ===========
-   Hero
-   =========== */
+Hero
+=========== */
 
 .hero-section {
   position: relative;
@@ -328,17 +327,32 @@ button {
 .hero-gradient {
   position: absolute;
   inset: -20%;
-  background:
-    radial-gradient(circle at 10% -20%, rgba(56, 189, 248, 0.15), transparent 55%),
-    radial-gradient(circle at 90% -10%, rgba(129, 140, 248, 0.45), transparent 60%),
-    radial-gradient(circle at 50% 120%, rgba(244, 114, 182, 0.35), transparent 55%);
+  background: radial-gradient(
+      circle at 10% -20%,
+      rgba(56, 189, 248, 0.15),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 90% -10%,
+      rgba(129, 140, 248, 0.45),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 50% 120%,
+      rgba(244, 114, 182, 0.35),
+      transparent 55%
+    );
   opacity: 0.8;
+  /* animated gradient */
+  animation: hero-gradient-shift 28s ease-in-out infinite alternate;
 }
 
 .hero-orbit {
   position: absolute;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.12);
+  /* floating orbit animation */
+  animation: hero-orbit-float 16s ease-in-out infinite alternate;
 }
 
 .hero-orbit-1 {
@@ -347,17 +361,21 @@ button {
   top: 12%;
   left: -10%;
 }
+
 .hero-orbit-2 {
   width: 520px;
   height: 520px;
   top: 30%;
   right: -18%;
+  animation-duration: 22s;
 }
+
 .hero-orbit-3 {
   width: 260px;
   height: 260px;
   bottom: -8%;
   left: 12%;
+  animation-duration: 18s;
 }
 
 .hero-grid {
@@ -427,8 +445,14 @@ button {
 }
 
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .hero-description {
@@ -539,7 +563,11 @@ button {
   content: "";
   position: absolute;
   inset: -40% 30% auto auto;
-  background: radial-gradient(circle at top, rgba(96, 165, 250, 0.7), transparent);
+  background: radial-gradient(
+    circle at top,
+    rgba(96, 165, 250, 0.7),
+    transparent
+  );
   opacity: 0.2;
 }
 
@@ -640,8 +668,13 @@ button {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 /* Hero responsive */
@@ -671,8 +704,8 @@ button {
 }
 
 /* ===========
-   Section headers
-   =========== */
+Section headers
+=========== */
 
 .section-header {
   text-align: center;
@@ -701,8 +734,8 @@ button {
 }
 
 /* ===========
-   About
-   =========== */
+About
+=========== */
 
 .about-grid {
   display: grid;
@@ -834,8 +867,8 @@ button {
 }
 
 /* ===========
-   Experience
-   =========== */
+Experience
+=========== */
 
 .exp-grid {
   display: grid;
@@ -913,8 +946,8 @@ button {
 }
 
 /* ===========
-   Projects
-   =========== */
+Projects
+=========== */
 
 .project-tabs {
   display: inline-flex;
@@ -962,6 +995,9 @@ button {
   transform: translateY(0);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast),
     border-color var(--transition-fast), background var(--transition-fast);
+  /* floating project animation */
+  animation: project-float 10s ease-in-out infinite;
+  animation-delay: calc(var(--card-index, 0) * 0.4s);
 }
 
 .project-card:hover {
@@ -1055,8 +1091,8 @@ button {
 }
 
 /* ===========
-   Skills
-   =========== */
+Skills
+=========== */
 
 .skills-grid {
   display: grid;
@@ -1104,8 +1140,8 @@ button {
 }
 
 /* ===========
-   Contact
-   =========== */
+Contact
+=========== */
 
 .contact-grid {
   display: grid;
@@ -1179,8 +1215,9 @@ button {
   justify-content: center;
   font-size: 0.85rem;
   color: var(--text-soft);
-  transition: background var(--transition-fast), border-color var(--transition-fast),
-    transform var(--transition-fast), color var(--transition-fast);
+  transition: background var(--transition-fast),
+    border-color var(--transition-fast), transform var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .social-link:hover {
@@ -1233,8 +1270,8 @@ select {
   font-family: inherit;
   font-size: 0.85rem;
   outline: none;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background var(--transition-fast);
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
 textarea {
@@ -1275,8 +1312,8 @@ select:focus {
 }
 
 /* ===========
-   Footer
-   =========== */
+Footer
+=========== */
 
 .footer {
   padding: 1.7rem 0 2.4rem;
@@ -1309,8 +1346,8 @@ select:focus {
 }
 
 /* ===========
-   Reveal animations
-   =========== */
+Reveal animations
+=========== */
 
 .reveal {
   opacity: 0;
@@ -1321,4 +1358,45 @@ select:focus {
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ===========
+New animation keyframes
+=========== */
+
+@keyframes hero-orbit-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(12px, -18px, 0) scale(1.03);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(-10px, 16px, 0) scale(1.02);
+    opacity: 0.75;
+  }
+}
+
+@keyframes hero-gradient-shift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-18px, 12px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(14px, -10px, 0) scale(1.03);
+  }
+}
+
+@keyframes project-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
