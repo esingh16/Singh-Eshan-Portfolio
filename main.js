@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll(".nav-link");
   const themeToggle = document.getElementById("themeToggle");
   const progressBar = document.getElementById("scrollProgressBar");
+  const heroSection = document.querySelector(".hero-section");
+  const heroGradient = document.querySelector(".hero-gradient");
+  const heroOrbits = document.querySelectorAll(".hero-orbit");
 
   // Theme toggle
   const storedTheme = localStorage.getItem("eshan-theme");
@@ -238,6 +241,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Parallax hero background (subtle)
+  if (heroSection && heroGradient && heroOrbits.length) {
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      const moveX = x * 30;
+      const moveY = y * 30;
+
+      heroGradient.style.transform = `translate(${moveX}px, ${moveY}px)`;
+
+      heroOrbits.forEach((orbit, index) => {
+        const depth = (index + 1) * 8;
+        const ox = -x * depth;
+        const oy = -y * depth;
+        orbit.style.transform = `translate(${ox}px, ${oy}px)`;
+      });
+    });
+
+    heroSection.addEventListener("mouseleave", () => {
+      heroGradient.style.transform = "translate(0, 0)";
+      heroOrbits.forEach((orbit) => {
+        orbit.style.transform = "translate(0, 0)";
+      });
+    });
+  }
+
   // Contact form (Formspree validation)
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
@@ -273,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       setFormStatus("Sending your message…", "info");
-      // allow submit to Formspree
+      // submit to Formspree normally
     });
   }
 });
