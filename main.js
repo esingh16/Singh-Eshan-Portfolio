@@ -6,9 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll(".nav-link");
   const themeToggle = document.getElementById("themeToggle");
   const progressBar = document.getElementById("scrollProgressBar");
-  const heroSection = document.querySelector(".hero-section");
-  const heroGradient = document.querySelector(".hero-gradient");
-  const heroOrbits = document.querySelectorAll(".hero-orbit");
 
   // Theme toggle
   const storedTheme = localStorage.getItem("eshan-theme");
@@ -137,28 +134,16 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(type, 600);
   }
 
-  // Reveal on scroll (with stagger support)
+  // Reveal on scroll
   const revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const target = entry.target;
-
-          if (target.classList.contains("reveal-stagger")) {
-            const children = target.querySelectorAll(".reveal-item");
-            children.forEach((child, index) => {
-              setTimeout(() => {
-                child.classList.add("visible");
-              }, index * 120);
-            });
-          } else {
-            target.classList.add("visible");
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
           }
-
-          observer.unobserve(target);
         });
       },
       { threshold: 0.18 }
@@ -183,3 +168,112 @@ document.addEventListener("DOMContentLoaded", () => {
               : 0;
           animateNumber(el, target, decimals);
           statsObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.45 }
+    );
+    metricEls.forEach((el) => statsObserver.observe(el));
+  }
+
+  function animateNumber(el, target, decimals) {
+    let current = 0;
+    const frames = 80;
+    const increment = target / frames;
+    const duration = 1500;
+    const stepTime = duration / frames;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent =
+        decimals > 0 ? current.toFixed(decimals) : Math.round(current);
+    }, stepTime);
+  }
+
+  // Project filter
+  const projectTabs = document.querySelectorAll(".project-tab");
+  const projectCards = document.querySelectorAll(".project-card");
+
+  projectTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const filter = tab.dataset.filter || "all";
+
+      projectTabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      projectCards.forEach((card) => {
+        const category = card.dataset.category || "";
+        const categories = category.split(/\s+/);
+        const show = filter === "all" ? true : categories.includes(filter.toLowerCase());
+        card.style.display = show ? "block" : "none";
+      });
+    });
+  });
+
+  // Tilt hero card
+  const tiltCard = document.querySelector(".tilt-card");
+  if (tiltCard) {
+    tiltCard.addEventListener("mousemove", (e) => {
+      const rect = tiltCard.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 18;
+      const rotateY = (centerX - x) / 18;
+      tiltCard.style.transform = `
+        perspective(900px)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translateY(-4px)
+      `;
+    });
+
+    tiltCard.addEventListener("mouseleave", () => {
+      tiltCard.style.transform =
+        "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)";
+    });
+  }
+
+  // Contact form (Formspree validation)
+  const contactForm = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
+
+  function setFormStatus(message, type = "info") {
+    if (!formStatus) return;
+    formStatus.textContent = message;
+    formStatus.style.color =
+      type === "error"
+        ? "#ef4444"
+        : type === "success"
+        ? "#4ade80"
+        : "#9ca3af";
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      const name = document.getElementById("name")?.value.trim();
+      const email = document.getElementById("emailInput")?.value.trim();
+      const type = document.getElementById("type")?.value;
+      const message = document.getElementById("message")?.value.trim();
+
+      if (!name || !email || !type || !message) {
+        e.preventDefault();
+        setFormStatus("Please fill in all fields.", "error");
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        e.preventDefault();
+        setFormStatus("Please provide a valid email address.", "error");
+        return;
+      }
+
+      setFormStatus("Sending your message…", "info");
+      // allow submit to Formspree
+    });
+  }
+});
