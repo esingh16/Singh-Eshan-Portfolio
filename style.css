@@ -113,13 +113,12 @@ button {
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.12);
   transition: background var(--transition-med), border-color var(--transition-med),
-    box-shadow var(--transition-med), transform var(--transition-med);
+    box-shadow var(--transition-med);
 }
 
 .navbar.scrolled {
   background: rgba(2, 6, 23, 0.98);
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.7);
-  transform: translateY(-1px);
 }
 
 .nav-inner {
@@ -178,7 +177,7 @@ button {
   position: relative;
   font-size: 0.9rem;
   color: var(--text-soft);
-  transition: color var(--transition-fast), transform var(--transition-fast);
+  transition: color var(--transition-fast);
 }
 
 .nav-link::after {
@@ -195,7 +194,6 @@ button {
 
 .nav-link:hover {
   color: var(--text);
-  transform: translateY(-1px);
 }
 
 .nav-link.active {
@@ -218,15 +216,13 @@ button {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast),
-    box-shadow var(--transition-fast);
+  transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 .nav-theme-toggle:hover {
-  transform: translateY(-2px);
-  background: rgba(30, 64, 175, 0.9);
+  transform: translateY(-1px);
+  background: rgba(30, 64, 175, 0.8);
   color: #e5e7eb;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.6);
 }
 
 /* Hamburger */
@@ -320,7 +316,6 @@ button {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  overflow: hidden;
 }
 
 .hero-bg {
@@ -338,29 +333,12 @@ button {
     radial-gradient(circle at 90% -10%, rgba(129, 140, 248, 0.45), transparent 60%),
     radial-gradient(circle at 50% 120%, rgba(244, 114, 182, 0.35), transparent 55%);
   opacity: 0.8;
-  transition: transform 0.4s ease-out;
-  will-change: transform;
-  animation: heroGlow 18s ease-in-out infinite alternate;
-}
-
-@keyframes heroGlow {
-  0% {
-    filter: hue-rotate(0deg) saturate(1);
-  }
-  50% {
-    filter: hue-rotate(12deg) saturate(1.1);
-  }
-  100% {
-    filter: hue-rotate(-8deg) saturate(1.05);
-  }
 }
 
 .hero-orbit {
   position: absolute;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.12);
-  transition: transform 0.4s ease-out;
-  will-change: transform;
 }
 
 .hero-orbit-1 {
@@ -393,20 +371,6 @@ button {
 .hero-text {
   position: relative;
   z-index: 1;
-  animation: heroFadeIn 0.9s ease-out 0.1s both;
-}
-
-@keyframes heroFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
 }
 
 .hero-pill {
@@ -493,24 +457,20 @@ button {
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background 0.18s ease,
-    border-color 0.18s ease,
-    color 0.18s ease;
-  will-change: transform, box-shadow;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .btn-primary {
-  background: radial-gradient(circle at 0 0, #f97316, #6366f1);
+  background: linear-gradient(135deg, #6366f1, #f97316);
   color: var(--text-on-accent);
   box-shadow: 0 18px 45px rgba(79, 70, 229, 0.55);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 24px 65px rgba(79, 70, 229, 0.85);
+  transform: translateY(-1px) translateZ(0);
+  box-shadow: 0 22px 60px rgba(79, 70, 229, 0.75);
 }
 
 .btn-secondary {
@@ -520,10 +480,8 @@ button {
 }
 
 .btn-secondary:hover {
-  background: rgba(15, 23, 42, 0.98);
+  background: rgba(15, 23, 42, 0.95);
   color: var(--text);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.85);
 }
 
 /* Metrics */
@@ -541,14 +499,6 @@ button {
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(148, 163, 184, 0.2);
   box-shadow: var(--shadow-subtle);
-  transform: translateY(0);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.metric:hover {
-  transform: translateY(-3px);
-  border-color: rgba(129, 140, 248, 0.8);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
 }
 
 .metric-value {
@@ -583,20 +533,6 @@ button {
   padding: 1.3rem 1.25rem 1.1rem;
   position: relative;
   overflow: hidden;
-  animation: heroCardIn 0.9s ease-out 0.2s both;
-}
-
-@keyframes heroCardIn {
-  from {
-    opacity: 0;
-    transform: translateY(24px) scale(0.96);
-    filter: blur(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
 }
 
 .hero-card::before {
@@ -681,33 +617,6 @@ button {
   border-radius: 999px;
   background: #22c55e;
   box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
-  position: relative;
-  overflow: visible;
-}
-
-.status-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 2px solid rgba(34, 197, 94, 0.7);
-  opacity: 0.8;
-  animation: pulseDot 2s ease-out infinite;
-}
-
-@keyframes pulseDot {
-  0% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  70% {
-    transform: scale(2.1);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(2.4);
-    opacity: 0;
-  }
 }
 
 /* Scroll down */
@@ -821,12 +730,6 @@ button {
   border-radius: 16px;
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(148, 163, 184, 0.35);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.highlight-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.9);
 }
 
 .highlight-item i {
@@ -947,14 +850,6 @@ button {
   padding: 1.15rem 1.2rem 1.05rem;
   box-shadow: var(--shadow-subtle);
   font-size: 0.86rem;
-  transform: translateY(0);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.exp-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(129, 140, 248, 0.85);
-  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.95);
 }
 
 .exp-header {
@@ -1041,14 +936,13 @@ button {
   color: var(--text-soft);
   cursor: pointer;
   transition: background var(--transition-fast), color var(--transition-fast),
-    transform var(--transition-fast), box-shadow var(--transition-fast);
+    transform var(--transition-fast);
 }
 
 .project-tab.active {
   background: var(--accent-soft);
   color: var(--text);
   transform: translateY(-1px);
-  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.5);
 }
 
 .projects-grid {
@@ -1177,12 +1071,6 @@ button {
   padding: 1rem 1.1rem 0.9rem;
   box-shadow: var(--shadow-subtle);
   font-size: 0.86rem;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.skill-column:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.95);
 }
 
 .skill-column i {
@@ -1240,12 +1128,6 @@ button {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 0.75rem;
   align-items: center;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.contact-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.95);
 }
 
 .contact-icon {
@@ -1298,8 +1180,7 @@ button {
   font-size: 0.85rem;
   color: var(--text-soft);
   transition: background var(--transition-fast), border-color var(--transition-fast),
-    transform var(--transition-fast), color var(--transition-fast),
-    box-shadow var(--transition-fast);
+    transform var(--transition-fast), color var(--transition-fast);
 }
 
 .social-link:hover {
@@ -1307,7 +1188,6 @@ button {
   background: rgba(37, 99, 235, 0.95);
   border-color: rgba(59, 130, 246, 0.9);
   color: #eef2ff;
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.7);
 }
 
 /* Contact form */
@@ -1354,7 +1234,7 @@ select {
   font-size: 0.85rem;
   outline: none;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
-    background var(--transition-fast), transform 0.12s ease;
+    background var(--transition-fast);
 }
 
 textarea {
@@ -1367,7 +1247,6 @@ textarea:focus,
 select:focus {
   border-color: #6366f1;
   box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.6);
-  transform: translateY(-1px);
 }
 
 .btn-submit {
@@ -1435,17 +1314,11 @@ select:focus {
 
 .reveal {
   opacity: 0;
-  transform: translateY(24px) scale(0.98);
-  filter: blur(4px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease,
-    filter 0.6s ease;
-  will-change: opacity, transform, filter;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: translateY(0);
 }
