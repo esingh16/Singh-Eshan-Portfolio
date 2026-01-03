@@ -340,6 +340,19 @@ button {
   opacity: 0.8;
   transition: transform 0.4s ease-out;
   will-change: transform;
+  animation: heroGlow 18s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+  0% {
+    filter: hue-rotate(0deg) saturate(1);
+  }
+  50% {
+    filter: hue-rotate(12deg) saturate(1.1);
+  }
+  100% {
+    filter: hue-rotate(-8deg) saturate(1.05);
+  }
 }
 
 .hero-orbit {
@@ -668,6 +681,33 @@ button {
   border-radius: 999px;
   background: #22c55e;
   box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
+  position: relative;
+  overflow: visible;
+}
+
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(34, 197, 94, 0.7);
+  opacity: 0.8;
+  animation: pulseDot 2s ease-out infinite;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
 }
 
 /* Scroll down */
