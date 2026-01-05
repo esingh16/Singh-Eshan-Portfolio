@@ -30,8 +30,6 @@
   --transition-slow: 0.4s ease;
 }
 
-/* Light override stays for toggle */
-
 body.light {
   --bg: #f1f5f9;
   --bg-alt: #ffffff;
@@ -96,11 +94,6 @@ button {
 }
 
 .section-alt {
-  background: radial-gradient(circle at top left, #020617, #020617 40%, #020617);
-}
-
-/* NEW: softer alt for data theme */
-.section-alt-soft {
   background: radial-gradient(
       circle at 10% -10%,
       rgba(56, 189, 248, 0.08),
@@ -149,8 +142,6 @@ button {
   justify-content: space-between;
 }
 
-/* Brand */
-
 .nav-brand {
   display: flex;
   align-items: center;
@@ -185,8 +176,6 @@ button {
   font-size: 0.75rem;
   color: var(--text-soft-2);
 }
-
-/* Nav menu */
 
 .nav-menu {
   list-style: none;
@@ -228,8 +217,6 @@ button {
   width: 100%;
 }
 
-/* Theme toggle */
-
 .nav-theme-toggle {
   border: 1px solid rgba(148, 163, 184, 0.3);
   border-radius: 999px;
@@ -248,8 +235,6 @@ button {
   background: rgba(30, 64, 175, 0.8);
   color: #e5e7eb;
 }
-
-/* Hamburger */
 
 .nav-toggle {
   display: none;
@@ -283,8 +268,6 @@ button {
   transform: translateY(-4px) rotate(-45deg);
 }
 
-/* Scroll progress bar */
-
 #scrollProgressBar {
   position: absolute;
   left: 0;
@@ -293,8 +276,6 @@ button {
   width: 0;
   background: linear-gradient(to right, #38bdf8, #6366f1);
 }
-
-/* Mobile nav */
 
 @media (max-width: 768px) {
   .nav-menu {
@@ -330,7 +311,7 @@ button {
 }
 
 /* ========================
-   Hero + Data Theme
+   Hero + Data Network
 ========================= */
 
 .hero-section {
@@ -349,7 +330,6 @@ button {
   pointer-events: none;
 }
 
-/* Gradient backdrop */
 .hero-gradient {
   position: absolute;
   inset: -20%;
@@ -373,7 +353,7 @@ button {
   filter: blur(2px);
 }
 
-/* NEW: data-science network */
+/* Network background */
 
 .data-network-layer {
   position: absolute;
@@ -391,7 +371,8 @@ button {
   overflow: hidden;
 }
 
-/* Nodes = database / feature nodes */
+/* Nodes */
+
 .data-node {
   position: absolute;
   width: 7px;
@@ -430,7 +411,8 @@ button {
   animation-delay: 2.6s;
 }
 
-/* Links between nodes = graph edges */
+/* Links */
+
 .data-link {
   position: absolute;
   height: 1px;
@@ -470,7 +452,7 @@ button {
   transform: rotate(-5deg);
 }
 
-/* Orbits (kept but softened) */
+/* Orbits */
 
 .hero-orbit {
   position: absolute;
@@ -498,8 +480,6 @@ button {
   bottom: -8%;
   left: 12%;
 }
-
-/* Hero content */
 
 .hero-grid {
   position: relative;
@@ -647,6 +627,14 @@ button {
   border: 1px solid rgba(148, 163, 184, 0.25);
   box-shadow: var(--shadow-subtle);
   backdrop-filter: blur(12px);
+  transition: transform 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.metric:hover {
+  transform: translateY(-3px);
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
 }
 
 .metric-value {
@@ -662,7 +650,7 @@ button {
   color: var(--text-soft-2);
 }
 
-/* Hero visual */
+/* Hero card */
 
 .hero-visual {
   position: relative;
@@ -686,6 +674,7 @@ button {
   padding: 1.3rem 1.25rem 1.1rem;
   position: relative;
   overflow: hidden;
+  animation: card-breath 6s ease-in-out infinite;
 }
 
 .hero-card::before {
@@ -694,28 +683,6 @@ button {
   inset: -40% 30% auto auto;
   background: radial-gradient(circle at top, rgba(96, 165, 250, 0.7), transparent);
   opacity: 0.25;
-}
-
-/* NEW: subtle circuit overlay on card */
-
-.data-card::after {
-  content: "";
-  position: absolute;
-  inset: 8% 8%;
-  border-radius: inherit;
-  border: 1px dashed rgba(148, 163, 184, 0.3);
-  background-image: linear-gradient(
-      120deg,
-      rgba(56, 189, 248, 0.12) 0,
-      rgba(56, 189, 248, 0) 70%
-    ),
-    linear-gradient(
-      210deg,
-      rgba(56, 189, 248, 0.14) 0,
-      rgba(56, 189, 248, 0) 65%
-    );
-  mix-blend-mode: screen;
-  pointer-events: none;
 }
 
 .hero-avatar {
@@ -793,8 +760,6 @@ button {
   background: #22c55e;
   box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.25);
 }
-
-/* Scroll down */
 
 .scroll-down {
   position: absolute;
@@ -1142,9 +1107,15 @@ button {
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.8);
-  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.85);
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, 0.9);
+  box-shadow: 0 22px 70px rgba(15, 23, 42, 0.95);
+  background: radial-gradient(
+      circle at top left,
+      rgba(56, 189, 248, 0.12),
+      transparent 55%
+    ),
+    rgba(15, 23, 42, 0.98);
 }
 
 .project-badge {
@@ -1246,6 +1217,12 @@ button {
 .chip-list li {
   margin-bottom: 0.28rem;
   color: var(--text-soft);
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.chip-list li:hover {
+  color: #e5e7eb;
+  transform: translateX(4px);
 }
 
 /* Skills responsive */
@@ -1506,5 +1483,15 @@ select:focus {
   }
   100% {
     opacity: 0.2;
+  }
+}
+
+@keyframes card-breath {
+  0%,
+  100% {
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.65);
+  }
+  50% {
+    box-shadow: 0 22px 60px rgba(56, 189, 248, 0.7);
   }
 }
