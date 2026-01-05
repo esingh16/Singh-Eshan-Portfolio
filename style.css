@@ -1,6 +1,6 @@
-/* ===========
-Base & Theme
-=========== */
+/* ========================
+   Base Theme
+========================= */
 
 :root {
   --bg: #020617;
@@ -15,16 +15,22 @@ Base & Theme
   --text-soft-2: #6b7280;
   --text-on-accent: #f9fafb;
   --danger: #ef4444;
+
   --radius-lg: 18px;
   --radius-xl: 24px;
   --radius-pill: 999px;
+
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.65);
   --shadow-subtle: 0 8px 25px rgba(15, 23, 42, 0.4);
+
   --nav-height: 72px;
+
   --transition-fast: 0.18s ease;
   --transition-med: 0.25s ease;
   --transition-slow: 0.4s ease;
 }
+
+/* Light override stays for toggle */
 
 body.light {
   --bg: #f1f5f9;
@@ -38,7 +44,9 @@ body.light {
   --shadow-soft: 0 22px 60px rgba(148, 163, 184, 0.45);
 }
 
-/* Reset */
+/* ========================
+   Reset
+========================= */
 
 *,
 *::before,
@@ -52,8 +60,8 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   background: radial-gradient(circle at top, #020617 0, #020617 35%, #000 100%);
   color: var(--text);
   line-height: 1.6;
@@ -74,7 +82,9 @@ button {
   font-family: inherit;
 }
 
-/* Layout helpers */
+/* ========================
+   Layout helpers
+========================= */
 
 .container {
   width: min(1120px, 100% - 2.5rem);
@@ -89,15 +99,30 @@ button {
   background: radial-gradient(circle at top left, #020617, #020617 40%, #020617);
 }
 
+/* NEW: softer alt for data theme */
+.section-alt-soft {
+  background: radial-gradient(
+      circle at 10% -10%,
+      rgba(56, 189, 248, 0.08),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 90% 110%,
+      rgba(59, 130, 246, 0.12),
+      transparent 55%
+    ),
+    #020617;
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 80px 0;
   }
 }
 
-/* ===========
-Navbar
-=========== */
+/* ========================
+   Navbar
+========================= */
 
 .navbar {
   position: fixed;
@@ -124,6 +149,8 @@ Navbar
   justify-content: space-between;
 }
 
+/* Brand */
+
 .nav-brand {
   display: flex;
   align-items: center;
@@ -134,13 +161,13 @@ Navbar
   width: 36px;
   height: 36px;
   border-radius: 14px;
-  background: radial-gradient(circle at 20% 0, #f97316, #a855f7, #6366f1);
+  background: radial-gradient(circle at 20% 0, #38bdf8, #6366f1, #22c55e);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   color: #f9fafb;
-  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.7);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.95);
 }
 
 .brand-text {
@@ -185,7 +212,7 @@ Navbar
   width: 0;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(to right, #6366f1, #f97316);
+  background: linear-gradient(to right, #38bdf8, #6366f1);
   transition: width var(--transition-med);
 }
 
@@ -249,11 +276,9 @@ Navbar
 .nav-toggle.active span:nth-child(1) {
   transform: translateY(4px) rotate(45deg);
 }
-
 .nav-toggle.active span:nth-child(2) {
   opacity: 0;
 }
-
 .nav-toggle.active span:nth-child(3) {
   transform: translateY(-4px) rotate(-45deg);
 }
@@ -266,7 +291,7 @@ Navbar
   bottom: 0;
   height: 2px;
   width: 0;
-  background: linear-gradient(to right, #6366f1, #f97316);
+  background: linear-gradient(to right, #38bdf8, #6366f1);
 }
 
 /* Mobile nav */
@@ -304,9 +329,9 @@ Navbar
   }
 }
 
-/* ===========
-Hero
-=========== */
+/* ========================
+   Hero + Data Theme
+========================= */
 
 .hero-section {
   position: relative;
@@ -324,12 +349,14 @@ Hero
   pointer-events: none;
 }
 
+/* Gradient backdrop */
 .hero-gradient {
   position: absolute;
   inset: -20%;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 10% -20%,
-      rgba(56, 189, 248, 0.15),
+      rgba(56, 189, 248, 0.18),
       transparent 55%
     ),
     radial-gradient(
@@ -339,20 +366,116 @@ Hero
     ),
     radial-gradient(
       circle at 50% 120%,
-      rgba(244, 114, 182, 0.35),
+      rgba(45, 212, 191, 0.35),
       transparent 55%
     );
-  opacity: 0.8;
-  /* animated gradient */
-  animation: hero-gradient-shift 28s ease-in-out infinite alternate;
+  opacity: 0.9;
+  filter: blur(2px);
 }
+
+/* NEW: data-science network */
+
+.data-network-layer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      circle at 20% 20%,
+      rgba(15, 23, 42, 0.8),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(15, 23, 42, 0.85),
+      transparent 55%
+    );
+  overflow: hidden;
+}
+
+/* Nodes = database / feature nodes */
+.data-node {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  box-shadow:
+    0 0 0 4px rgba(56, 189, 248, 0.25),
+    0 0 18px rgba(56, 189, 248, 0.8);
+  opacity: 0.85;
+  animation: pulse-node 4s ease-in-out infinite;
+}
+
+.node-1 {
+  top: 18%;
+  left: 16%;
+}
+.node-2 {
+  top: 32%;
+  left: 58%;
+  animation-delay: 0.7s;
+}
+.node-3 {
+  top: 70%;
+  left: 22%;
+  animation-delay: 1.4s;
+}
+.node-4 {
+  top: 64%;
+  left: 78%;
+  animation-delay: 2s;
+}
+.node-5 {
+  top: 40%;
+  left: 86%;
+  animation-delay: 2.6s;
+}
+
+/* Links between nodes = graph edges */
+.data-link {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(56, 189, 248, 0),
+    rgba(56, 189, 248, 0.9),
+    rgba(56, 189, 248, 0)
+  );
+  opacity: 0.55;
+  transform-origin: left center;
+  animation: shimmer-link 6s linear infinite;
+}
+
+.link-1 {
+  top: 23%;
+  left: 16%;
+  width: 32%;
+  transform: rotate(6deg);
+}
+.link-2 {
+  top: 36%;
+  left: 45%;
+  width: 32%;
+  transform: rotate(-10deg);
+}
+.link-3 {
+  top: 60%;
+  left: 22%;
+  width: 40%;
+  transform: rotate(8deg);
+}
+.link-4 {
+  top: 68%;
+  left: 50%;
+  width: 34%;
+  transform: rotate(-5deg);
+}
+
+/* Orbits (kept but softened) */
 
 .hero-orbit {
   position: absolute;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.12);
-  /* floating orbit animation */
-  animation: hero-orbit-float 16s ease-in-out infinite alternate;
 }
 
 .hero-orbit-1 {
@@ -367,7 +490,6 @@ Hero
   height: 520px;
   top: 30%;
   right: -18%;
-  animation-duration: 22s;
 }
 
 .hero-orbit-3 {
@@ -375,8 +497,9 @@ Hero
   height: 260px;
   bottom: -8%;
   left: 12%;
-  animation-duration: 18s;
 }
+
+/* Hero content */
 
 .hero-grid {
   position: relative;
@@ -397,7 +520,7 @@ Hero
   gap: 0.5rem;
   border-radius: 999px;
   padding: 0.2rem 0.9rem 0.2rem 0.3rem;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(148, 163, 184, 0.4);
   font-size: 0.78rem;
   color: var(--text-soft);
@@ -413,7 +536,7 @@ Hero
 }
 
 .hero-title {
-  font-family: "Poppins", system-ui, sans-serif;
+  font-family: Poppins, system-ui, sans-serif;
   font-weight: 700;
   font-size: clamp(2.3rem, 4vw, 3rem);
   letter-spacing: 0.02em;
@@ -421,7 +544,7 @@ Hero
 }
 
 .highlight {
-  background: linear-gradient(to right, #6366f1, #f97316);
+  background: linear-gradient(to right, #38bdf8, #6366f1);
   -webkit-background-clip: text;
   color: transparent;
 }
@@ -487,19 +610,19 @@ Hero
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #6366f1, #f97316);
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
   color: var(--text-on-accent);
-  box-shadow: 0 18px 45px rgba(79, 70, 229, 0.55);
+  box-shadow: 0 18px 45px rgba(56, 189, 248, 0.7);
 }
 
 .btn-primary:hover {
   transform: translateY(-1px) translateZ(0);
-  box-shadow: 0 22px 60px rgba(79, 70, 229, 0.75);
+  box-shadow: 0 22px 60px rgba(56, 189, 248, 0.9);
 }
 
 .btn-secondary {
-  background: rgba(15, 23, 42, 0.7);
-  border-color: rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(148, 163, 184, 0.6);
   color: var(--text-soft);
 }
 
@@ -520,13 +643,14 @@ Hero
 .metric {
   padding: 0.7rem 0.8rem;
   border-radius: 16px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.25);
   box-shadow: var(--shadow-subtle);
+  backdrop-filter: blur(12px);
 }
 
 .metric-value {
-  font-family: "Poppins", system-ui, sans-serif;
+  font-family: Poppins, system-ui, sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
 }
@@ -551,7 +675,12 @@ Hero
   width: 100%;
   max-width: 320px;
   border-radius: var(--radius-xl);
-  background: radial-gradient(circle at 0 0, rgba(8, 47, 73, 0.5), #020617);
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(37, 99, 235, 0.35),
+      transparent 55%
+    ),
+    #020617;
   border: 1px solid rgba(148, 163, 184, 0.35);
   box-shadow: var(--shadow-soft);
   padding: 1.3rem 1.25rem 1.1rem;
@@ -563,12 +692,30 @@ Hero
   content: "";
   position: absolute;
   inset: -40% 30% auto auto;
-  background: radial-gradient(
-    circle at top,
-    rgba(96, 165, 250, 0.7),
-    transparent
-  );
-  opacity: 0.2;
+  background: radial-gradient(circle at top, rgba(96, 165, 250, 0.7), transparent);
+  opacity: 0.25;
+}
+
+/* NEW: subtle circuit overlay on card */
+
+.data-card::after {
+  content: "";
+  position: absolute;
+  inset: 8% 8%;
+  border-radius: inherit;
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+  background-image: linear-gradient(
+      120deg,
+      rgba(56, 189, 248, 0.12) 0,
+      rgba(56, 189, 248, 0) 70%
+    ),
+    linear-gradient(
+      210deg,
+      rgba(56, 189, 248, 0.14) 0,
+      rgba(56, 189, 248, 0) 65%
+    );
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
 .hero-avatar {
@@ -576,7 +723,7 @@ Hero
   width: 72px;
   height: 72px;
   border-radius: 999px;
-  background: radial-gradient(circle at 0 0, #f97316, #6366f1);
+  background: radial-gradient(circle at 0 0, #38bdf8, #6366f1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -683,15 +830,12 @@ Hero
   .hero-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-
   .hero-visual {
     justify-content: flex-start;
   }
-
   .hero-section {
     padding-top: calc(var(--nav-height) + 16px);
   }
-
   .hero-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -703,9 +847,9 @@ Hero
   }
 }
 
-/* ===========
-Section headers
-=========== */
+/* ========================
+   Section headers
+========================= */
 
 .section-header {
   text-align: center;
@@ -721,7 +865,7 @@ Section headers
 }
 
 .section-title {
-  font-family: "Poppins", system-ui, sans-serif;
+  font-family: Poppins, system-ui, sans-serif;
   font-size: 1.9rem;
   margin: 0;
 }
@@ -733,9 +877,9 @@ Section headers
   color: var(--text-soft);
 }
 
-/* ===========
-About
-=========== */
+/* ========================
+   About
+========================= */
 
 .about-grid {
   display: grid;
@@ -761,7 +905,7 @@ About
   gap: 0.75rem;
   padding: 0.7rem 0.8rem;
   border-radius: 16px;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
@@ -784,7 +928,7 @@ About
 
 .timeline {
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.9);
   border: 1px solid rgba(148, 163, 184, 0.35);
   padding: 1.3rem 1.4rem 1.1rem;
   box-shadow: var(--shadow-subtle);
@@ -866,9 +1010,9 @@ About
   }
 }
 
-/* ===========
-Experience
-=========== */
+/* ========================
+   Experience
+========================= */
 
 .exp-grid {
   display: grid;
@@ -878,7 +1022,7 @@ Experience
 
 .exp-card {
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.95);
   border: 1px solid rgba(148, 163, 184, 0.4);
   padding: 1.15rem 1.2rem 1.05rem;
   box-shadow: var(--shadow-subtle);
@@ -945,9 +1089,9 @@ Experience
   }
 }
 
-/* ===========
-Projects
-=========== */
+/* ========================
+   Projects
+========================= */
 
 .project-tabs {
   display: inline-flex;
@@ -955,7 +1099,7 @@ Projects
   gap: 0.5rem;
   border-radius: 999px;
   padding: 0.25rem;
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.85);
   border: 1px solid rgba(148, 163, 184, 0.35);
   margin-bottom: 1.5rem;
 }
@@ -987,7 +1131,7 @@ Projects
 .project-card {
   position: relative;
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.97);
   border: 1px solid rgba(148, 163, 184, 0.4);
   padding: 1.1rem 1.1rem 1rem;
   box-shadow: var(--shadow-subtle);
@@ -995,14 +1139,11 @@ Projects
   transform: translateY(0);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast),
     border-color var(--transition-fast), background var(--transition-fast);
-  /* floating project animation */
-  animation: project-float 10s ease-in-out infinite;
-  animation-delay: calc(var(--card-index, 0) * 0.4s);
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(99, 102, 241, 0.8);
+  border-color: rgba(56, 189, 248, 0.8);
   box-shadow: 0 20px 55px rgba(15, 23, 42, 0.85);
 }
 
@@ -1054,21 +1195,8 @@ Projects
   font-size: 0.7rem;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15, 23, 42, 0.9);
   border: 1px solid rgba(148, 163, 184, 0.5);
-}
-
-.project-link {
-  margin-left: auto;
-  font-size: 0.75rem;
-  color: var(--text-soft);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.project-link:hover {
-  color: var(--text);
 }
 
 /* Projects responsive */
@@ -1083,16 +1211,11 @@ Projects
   .projects-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-
-  .project-tabs {
-    display: flex;
-    flex-wrap: wrap;
-  }
 }
 
-/* ===========
-Skills
-=========== */
+/* ========================
+   Skills
+========================= */
 
 .skills-grid {
   display: grid;
@@ -1102,7 +1225,7 @@ Skills
 
 .skill-column {
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.95);
   border: 1px solid rgba(148, 163, 184, 0.4);
   padding: 1rem 1.1rem 0.9rem;
   box-shadow: var(--shadow-subtle);
@@ -1139,9 +1262,9 @@ Skills
   }
 }
 
-/* ===========
-Contact
-=========== */
+/* ========================
+   Contact
+========================= */
 
 .contact-grid {
   display: grid;
@@ -1157,7 +1280,7 @@ Contact
 
 .contact-card {
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.97);
   border: 1px solid rgba(148, 163, 184, 0.45);
   padding: 0.9rem 1rem 0.85rem;
   display: grid;
@@ -1215,9 +1338,8 @@ Contact
   justify-content: center;
   font-size: 0.85rem;
   color: var(--text-soft);
-  transition: background var(--transition-fast),
-    border-color var(--transition-fast), transform var(--transition-fast),
-    color var(--transition-fast);
+  transition: background var(--transition-fast), border-color var(--transition-fast),
+    transform var(--transition-fast), color var(--transition-fast);
 }
 
 .social-link:hover {
@@ -1231,7 +1353,7 @@ Contact
 
 .contact-form-wrapper {
   border-radius: var(--radius-lg);
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.98);
   border: 1px solid rgba(148, 163, 184, 0.45);
   padding: 1.1rem 1.2rem 1rem;
   box-shadow: var(--shadow-subtle);
@@ -1270,8 +1392,8 @@ select {
   font-family: inherit;
   font-size: 0.85rem;
   outline: none;
-  transition: border-color var(--transition-fast),
-    box-shadow var(--transition-fast), background var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast);
 }
 
 textarea {
@@ -1282,8 +1404,8 @@ textarea {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.6);
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7);
 }
 
 .btn-submit {
@@ -1311,9 +1433,9 @@ select:focus {
   }
 }
 
-/* ===========
-Footer
-=========== */
+/* ========================
+   Footer
+========================= */
 
 .footer {
   padding: 1.7rem 0 2.4rem;
@@ -1339,15 +1461,14 @@ Footer
   .footer-inner {
     flex-direction: column;
   }
-
   .footer-note {
     text-align: left;
   }
 }
 
-/* ===========
-Reveal animations
-=========== */
+/* ========================
+   Reveal animations
+========================= */
 
 .reveal {
   opacity: 0;
@@ -1360,43 +1481,30 @@ Reveal animations
   transform: translateY(0);
 }
 
-/* ===========
-New animation keyframes
-=========== */
+/* ========================
+   Data Animations
+========================= */
 
-@keyframes hero-orbit-float {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate3d(12px, -18px, 0) scale(1.03);
-    opacity: 0.9;
-  }
-  100% {
-    transform: translate3d(-10px, 16px, 0) scale(1.02);
-    opacity: 0.75;
-  }
-}
-
-@keyframes hero-gradient-shift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-18px, 12px, 0) scale(1.05);
-  }
-  100% {
-    transform: translate3d(14px, -10px, 0) scale(1.03);
-  }
-}
-
-@keyframes project-float {
+@keyframes pulse-node {
   0%,
   100% {
-    transform: translateY(0);
+    transform: scale(1);
+    opacity: 0.7;
   }
   50% {
-    transform: translateY(-6px);
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer-link {
+  0% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.2;
   }
 }
