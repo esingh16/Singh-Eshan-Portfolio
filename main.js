@@ -115,10 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const typewriterEl = document.getElementById("typewriter");
   if (typewriterEl) {
     const roles = [
-      "Data Science & AI Engineer",
-      "ML/DL Engineer",
+      "Data Scientist",
+      "AI/ML Engineer",
       "NLP & RAG Practitioner",
-      "Full‑Stack AI Prototype Builder",
+      "Data Analyst",
     ];
     let roleIndex = 0;
     let charIndex = 0;
