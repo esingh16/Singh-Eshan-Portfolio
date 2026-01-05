@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
   const progressBar = document.getElementById("scrollProgressBar");
 
-  // Theme toggle
+  /* Theme toggle */
+
   const storedTheme = localStorage.getItem("eshan-theme");
   if (storedTheme === "light") {
     body.classList.add("light");
@@ -33,24 +34,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Mobile nav
+  /* Mobile nav */
+
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", () => {
       navToggle.classList.toggle("active");
       navMenu.classList.toggle("active");
     });
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (navMenu.classList.contains("active")) {
-          navToggle.classList.remove("active");
-          navMenu.classList.remove("active");
-        }
-      });
-    });
   }
 
-  // Active nav & scroll progress
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (!navToggle || !navMenu) return;
+      if (navMenu.classList.contains("active")) {
+        navToggle.classList.remove("active");
+        navMenu.classList.remove("active");
+      }
+    });
+  });
+
+  /* Active nav & scroll progress */
+
   const sections = document.querySelectorAll("section[id]");
 
   function markActiveNav() {
@@ -90,32 +94,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   markActiveNav();
 
-  // Smooth scroll
-  document.querySelectorAll("a[href^='#']").forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      const id = anchor.getAttribute("href");
-      if (!id || id === "#") return;
-      const target = document.querySelector(id);
-      if (!target) return;
+  /* Smooth scroll */
 
-      e.preventDefault();
-      const offset = target.offsetTop - 72;
-      window.scrollTo({
-        top: offset,
-        behavior: "smooth",
-      });
-    });
-  });
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach((anchor) =>
+      anchor.addEventListener("click", (e) => {
+        const id = anchor.getAttribute("href");
+        if (!id || id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        const offset = target.offsetTop - 72;
+        window.scrollTo({ top: offset, behavior: "smooth" });
+      })
+    );
 
-  // Typewriter
+  /* Typewriter */
+
   const typewriterEl = document.getElementById("typewriter");
-
   if (typewriterEl) {
     const roles = [
-      "Data Scientist",
-      "AI/ML Engineer",
-      "NLP RAG Practitioner",
-      "Data Analyst",
+      "Data Science & AI Engineer",
+      "ML/DL Engineer",
+      "NLP & RAG Practitioner",
+      "Full‑Stack AI Prototype Builder",
     ];
     let roleIndex = 0;
     let charIndex = 0;
@@ -137,16 +140,15 @@ document.addEventListener("DOMContentLoaded", () => {
         roleIndex = (roleIndex + 1) % roles.length;
       }
 
-      const speed = deleting ? 45 : 95;
-      setTimeout(type, speed);
+      setTimeout(type, deleting ? 45 : 95);
     }
 
     setTimeout(type, 600);
   }
 
-  // Reveal on scroll
-  const revealEls = document.querySelectorAll(".reveal");
+  /* Reveal on scroll */
 
+  const revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -159,14 +161,33 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { threshold: 0.18 }
     );
-
     revealEls.forEach((el) => observer.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add("visible"));
   }
 
-  // Metrics counter
+  /* Metrics counter */
+
   const metricEls = document.querySelectorAll(".metric-value");
+  if (metricEls.length && "IntersectionObserver" in window) {
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseFloat(el.dataset.target || "0");
+          const decimals = (el.dataset.target || "").includes(".")
+            ? (el.dataset.target || "").split(".")[1].length
+            : 0;
+          animateNumber(el, target, decimals);
+          statsObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.45 }
+    );
+
+    metricEls.forEach((el) => statsObserver.observe(el));
+  }
 
   function animateNumber(el, target, decimals) {
     let current = 0;
@@ -186,27 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }, stepTime);
   }
 
-  if (metricEls.length && "IntersectionObserver" in window) {
-    const statsObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const target = parseFloat(el.dataset.target || "0");
-          const decimals = el.dataset.target.includes(".")
-            ? el.dataset.target.split(".")[1].length
-            : 0;
-          animateNumber(el, target, decimals);
-          statsObserver.unobserve(el);
-        });
-      },
-      { threshold: 0.45 }
-    );
+  /* Project filter */
 
-    metricEls.forEach((el) => statsObserver.observe(el));
-  }
-
-  // Project filter
   const projectTabs = document.querySelectorAll(".project-tab");
   const projectCards = document.querySelectorAll(".project-card");
 
@@ -220,16 +222,15 @@ document.addEventListener("DOMContentLoaded", () => {
       projectCards.forEach((card) => {
         const category = card.dataset.category || "";
         const categories = category.split(" ");
-        const show =
-          filter === "all" || categories.includes(filter.toLowerCase());
+        const show = filter === "all" || categories.includes(filter.toLowerCase());
         card.style.display = show ? "block" : "none";
       });
     });
   });
 
-  // Tilt hero card
-  const tiltCard = document.querySelector(".tilt-card");
+  /* Tilt hero card */
 
+  const tiltCard = document.querySelector(".tilt-card");
   if (tiltCard) {
     tiltCard.addEventListener("mousemove", (e) => {
       const rect = tiltCard.getBoundingClientRect();
@@ -237,10 +238,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-
-      const rotateX = ((y - centerY) / centerY) * 8;
-      const rotateY = ((centerX - x) / centerX) * 8;
-
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
       tiltCard.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
 
@@ -250,7 +249,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Contact form – Formspree validation
+  /* Contact form validation */
+
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
 
@@ -284,14 +284,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Parallax for data network
-  const networkLayer = document.querySelector(".data-network-layer");
+  /* Click sparks */
 
-  window.addEventListener("scroll", () => {
-    if (!networkLayer) return;
-    const scrollY = window.scrollY;
-    const offset = scrollY * 0.03;
-    const scale = 1 + scrollY * 0.00015;
-    networkLayer.style.transform = `translateY(${offset}px) scale(${scale})`;
+  document.addEventListener("click", (e) => {
+    // If you ever want to ignore clicks on buttons/links, uncomment:
+    // if (e.target.closest("button, a, input, textarea, select")) return;
+
+    const spark = document.createElement("div");
+    spark.className = "spark";
+    spark.style.left = `${e.clientX - 4}px`;
+    spark.style.top = `${e.clientY - 4}px`;
+    document.body.appendChild(spark);
+
+    setTimeout(() => {
+      spark.remove();
+    }, 650);
   });
 });
