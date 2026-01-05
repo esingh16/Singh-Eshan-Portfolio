@@ -650,6 +650,41 @@ button {
   color: var(--text-soft-2);
 }
 
+/* Data stream bars */
+
+.metric-stream {
+  margin-top: 0.45rem;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  overflow: hidden;
+  position: relative;
+}
+
+.stream-bar {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(56, 189, 248, 0),
+    rgba(56, 189, 248, 0.85),
+    rgba(56, 189, 248, 0)
+  );
+  background-size: 180% 100%;
+  animation: stream-flow 2.4s linear infinite;
+  opacity: 0.9;
+}
+
+.metric:nth-child(2) .stream-bar {
+  animation-delay: 0.4s;
+}
+.metric:nth-child(3) .stream-bar {
+  animation-delay: 0.8s;
+}
+.metric:nth-child(4) .stream-bar {
+  animation-delay: 1.2s;
+}
+
 /* Hero card */
 
 .hero-visual {
@@ -1459,7 +1494,7 @@ select:focus {
 }
 
 /* ========================
-   Data Animations
+   Animations
 ========================= */
 
 @keyframes pulse-node {
@@ -1493,5 +1528,14 @@ select:focus {
   }
   50% {
     box-shadow: 0 22px 60px rgba(56, 189, 248, 0.7);
+  }
+}
+
+@keyframes stream-flow {
+  0% {
+    background-position-x: -80%;
+  }
+  100% {
+    background-position-x: 120%;
   }
 }
