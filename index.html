@@ -140,14 +140,14 @@
               </div>
             </div>
             <div class="metric">
-              <span class="metric-value" data-target="3">3</span>
-              <span class="metric-label">ML/AI Projects</span>
+              <span class="metric-value" data-target="5">5</span>
+              <span class="metric-label">Major Projects</span>
               <div class="metric-stream">
                 <span class="stream-bar"></span>
               </div>
             </div>
             <div class="metric">
-              <span class="metric-value" data-target="3">3</span>
+              <span class="metric-value" data-target="4">4</span>
               <span class="metric-label">Industry Internships</span>
               <div class="metric-stream">
                 <span class="stream-bar"></span>
@@ -315,12 +315,13 @@
           <p class="section-kicker">Experience</p>
           <h2 class="section-title">Industry Internships</h2>
           <p class="section-subtitle">
-            Applying theory in production‑oriented environments across fintech,
-            healthcare, and analytics.
+            Applying theory in production‑oriented environments across software,
+            fintech, healthcare, and analytics.
           </p>
         </header>
 
         <div class="exp-grid">
+          <!-- YBI -->
           <article class="exp-card reveal">
             <header class="exp-header">
               <div>
@@ -347,6 +348,7 @@
             </div>
           </article>
 
+          <!-- Nexus -->
           <article class="exp-card reveal">
             <header class="exp-header">
               <div>
@@ -373,6 +375,35 @@
             </div>
           </article>
 
+          <!-- Oytie -->
+          <article class="exp-card reveal">
+            <header class="exp-header">
+              <div>
+                <h3>Jr. Software Developer (L3)</h3>
+                <p class="exp-company">Oytie Pvt. Ltd. · Pune, India</p>
+              </div>
+              <div>
+                <span class="exp-time">Dec 2023 – Jan 2024</span>
+              </div>
+            </header>
+            <ul class="exp-list">
+              <li>
+                Built an assignment management system for internal teams using
+                HTML, CSS, JavaScript, Django, and a PostgreSQL‑backed REST
+                API.
+              </li>
+              <li>
+                Implemented role‑based access, submission tracking, and admin
+                dashboards for faculty and L3 support engineers.
+              </li>
+            </ul>
+            <div class="exp-tags">
+              <span>Django</span><span>REST API</span><span>PostgreSQL</span
+              ><span>JavaScript</span>
+            </div>
+          </article>
+
+          <!-- Codsoft -->
           <article class="exp-card reveal">
             <header class="exp-header">
               <div>
@@ -409,8 +440,8 @@
           <p class="section-kicker">Projects</p>
           <h2 class="section-title">Selected Work</h2>
           <p class="section-subtitle">
-            A mix of hackathon wins, academic research, and production‑style
-            prototypes.
+            Hackathon wins, applied ML systems, and AI assistants that ship
+            beyond notebooks.
           </p>
         </header>
 
@@ -422,6 +453,7 @@
         </div>
 
         <div class="projects-grid">
+          <!-- Care Compass -->
           <article class="project-card reveal" data-category="fullstack ml">
             <div class="project-badge">Gemini Hackathon · 2nd Place</div>
             <h3 class="project-title">Care Compass</h3>
@@ -434,12 +466,8 @@
               high‑volume data.
             </p>
             <ul class="project-points">
-              <li>
-                FHIR‑compliant data model with scalable RESTful backend.
-              </li>
-              <li>
-                Google Maps API for provider‑patient proximity visualisation.
-              </li>
+              <li>FHIR‑compliant data model with scalable RESTful backend.</li>
+              <li>Google Maps API for provider‑patient proximity maps.</li>
             </ul>
             <div class="project-tags">
               <span>React</span><span>Node.js</span><span>MongoDB</span
@@ -447,6 +475,61 @@
             </div>
           </article>
 
+          <!-- Persona Chatbot -->
+          <article class="project-card reveal" data-category="nlp ml fullstack">
+            <h3 class="project-title">Persona Voice Chatbot</h3>
+            <p class="project-meta">
+              Conversational AI · Android · TensorFlow · Firebase
+            </p>
+            <p class="project-description">
+              AI assistant that classifies user intent and persona labels to
+              emulate celebrities or historical figures with matching voice and
+              conversational style.
+            </p>
+            <ul class="project-points">
+              <li>
+                Used classification models and clustering over embeddings to
+                route queries to persona‑specific response generators.
+              </li>
+              <li>
+                Deployed Android client with Firebase backend and Google Cloud
+                Text‑to‑Speech for real‑time voice responses.
+              </li>
+            </ul>
+            <div class="project-tags">
+              <span>Python</span><span>TensorFlow</span><span>Firebase</span>
+              <span>Android Studio</span><span>GCP TTS API</span>
+            </div>
+          </article>
+
+          <!-- Organ Donation System -->
+          <article class="project-card reveal" data-category="ml fullstack">
+            <h3 class="project-title">Intelligent Organ Donation System</h3>
+            <p class="project-meta">
+              Healthcare Matching · Recommender · Web &amp; Chatbot
+            </p>
+            <p class="project-description">
+              System where recipients share medical data with an AI bot that
+              matches against donor records and surfaces compatible, nearby
+              organs with prioritised recommendations.
+            </p>
+            <ul class="project-points">
+              <li>
+                Implemented rule‑based eligibility checks plus similarity search
+                on blood group, tissue type, urgency, and distance.
+              </li>
+              <li>
+                Built web dashboard and conversational interface using Python,
+                Flask/FastAPI, a relational DB, and geolocation services.
+              </li>
+            </ul>
+            <div class="project-tags">
+              <span>Python</span><span>Flask/FastAPI</span><span>PostgreSQL</span
+              ><span>Recommender</span>
+            </div>
+          </article>
+
+          <!-- Loan Default Risk -->
           <article class="project-card reveal" data-category="ml">
             <h3 class="project-title">Loan Default Risk Prediction</h3>
             <p class="project-meta">
@@ -466,69 +549,7 @@
             </div>
           </article>
 
-          <article class="project-card reveal" data-category="nlp ml">
-            <h3 class="project-title">Career Counselling Using AI</h3>
-            <p class="project-meta">
-              Android · NLP · RAG · Google Cloud
-            </p>
-            <p class="project-description">
-              Voice‑enabled Android assistant with GPT, RAG, and Google Cloud
-              Speech &amp; TTS for personalised career recommendations.
-              Published in WRFER.
-            </p>
-            <ul class="project-points">
-              <li>
-                Speech‑to‑text and TTS integration with conversational flows.
-              </li>
-              <li>
-                Hybrid ML stack combining decision trees, SVM, Random Forests,
-                and clustering.
-              </li>
-            </ul>
-            <div class="project-tags">
-              <span>Android</span><span>NLP</span><span>RAG</span><span>GPT</span>
-            </div>
-          </article>
-
-          <article class="project-card reveal" data-category="ml">
-            <h3 class="project-title">Disease Prediction System</h3>
-            <p class="project-meta">
-              Healthcare · Random Forest · XGBoost
-            </p>
-            <p class="project-description">
-              Multi‑class prediction for gastrointestinal and skin disorders
-              with advanced feature engineering and ensemble models.
-            </p>
-            <ul class="project-points">
-              <li>
-                End‑to‑end pipeline from raw clinical data to predictions.
-              </li>
-              <li>Optimised Random Forest and XGBoost ensembles.</li>
-            </ul>
-            <div class="project-tags">
-              <span>Python</span><span>Random Forest</span><span>XGBoost</span>
-            </div>
-          </article>
-
-          <article class="project-card reveal" data-category="ml">
-            <h3 class="project-title">Handwritten Digit Classification</h3>
-            <p class="project-meta">
-              Computer Vision · CNN · SVM · KNN
-            </p>
-            <p class="project-description">
-              MNIST classifiers with KNN, SVM, and CNN, implemented in
-              TensorFlow/Keras and Scikit‑learn, reaching 87–92% accuracy.
-            </p>
-            <ul class="project-points">
-              <li>
-                Side‑by‑side benchmarking of classical vs deep models.
-              </li>
-            </ul>
-            <div class="project-tags">
-              <span>TensorFlow</span><span>Keras</span><span>Scikit‑learn</span>
-            </div>
-          </article>
-
+          <!-- Applied ML Mini-Suite -->
           <article class="project-card reveal" data-category="ml">
             <h3 class="project-title">Applied ML Mini‑Suite</h3>
             <p class="project-meta">
@@ -579,7 +600,7 @@
               <li>SQL</li>
               <li>Java</li>
               <li>JavaScript</li>
-              <li>Excel (Pivot, Power Query, DAX)</li>
+              <li>HTML/CSS · Django basics</li>
             </ul>
           </div>
 
