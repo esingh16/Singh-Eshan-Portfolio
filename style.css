@@ -538,8 +538,6 @@ button {
   justify-content: flex-end;
 }
 
-/* Hero card with static smoky border */
-
 .hero-card {
   width: 100%;
   max-width: 320px;
@@ -549,27 +547,50 @@ button {
   box-shadow: var(--shadow-soft);
   padding: 1.3rem 1.25rem 1.1rem;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
-/* only one pseudo-element for a still smoky border */
+/* existing light flare */
 .hero-card::before {
   content: "";
   position: absolute;
-  inset: -4px; /* tight around the rectangle */
-  border-radius: inherit;
-  background:
-    radial-gradient(circle at 0% 0%, rgba(148, 163, 184, 0.4), transparent 60%),
-    radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.4), transparent 60%),
-    radial-gradient(circle at 0% 100%, rgba(129, 140, 248, 0.4), transparent 60%),
-    radial-gradient(circle at 100% 100%, rgba(148, 163, 184, 0.4), transparent 60%);
-  filter: blur(10px);
-  opacity: 0.85;
-  pointer-events: none;
+  inset: -40% 30% auto auto;
+  background: radial-gradient(circle at top, rgba(96, 165, 250, 0.7), transparent);
+  opacity: 0.2;
 }
 
+/* Smoky ice border layer */
 .hero-card::after {
-  content: none;
+  content: "";
+  position: absolute;
+  inset: -25%;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    rgba(148, 163, 184, 0.22),
+    rgba(59, 130, 246, 0.4),
+    rgba(148, 163, 184, 0.22),
+    transparent 55%,
+    rgba(56, 189, 248, 0.35),
+    rgba(148, 163, 184, 0.22)
+  );
+  opacity: 0.4;
+  filter: blur(18px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: icySweep 10s linear infinite;
+}
+
+@keyframes icySweep {
+  0% {
+    transform: rotate(0deg) scale(1.02);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.04);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.02);
+  }
 }
 
 .hero-avatar {
