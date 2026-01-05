@@ -334,7 +334,7 @@ button {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: radial-gradient(circle, #facc15, #f97316, transparent);
+  background: radial-gradient(circle, #7dd3fc, #38bdf8, transparent);
   pointer-events: none;
   mix-blend-mode: screen;
   opacity: 0.9;
