@@ -1,7 +1,4 @@
-/* 
-   Base & Theme
-*/
-
+/* Base & Theme */
 :root {
   --bg: #020617;
   --bg-alt: #020617;
@@ -15,35 +12,31 @@
   --text-soft-2: #6b7280;
   --text-on-accent: #f9fafb;
   --danger: #ef4444;
-
   --radius-lg: 18px;
   --radius-xl: 24px;
   --radius-pill: 999px;
-
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.65);
   --shadow-subtle: 0 8px 25px rgba(15, 23, 42, 0.4);
-
   --nav-height: 72px;
-
   --transition-fast: 0.18s ease;
   --transition-med: 0.25s ease;
   --transition-slow: 0.4s ease;
 }
 
+/* light mode */
 body.light {
-  --bg: #f1f5f9;
-  --bg-alt: #ffffff;
-  --card: #ffffff;
+  --bg: #0f172a;
+  --bg-alt: #0b1120;
+  --card: #020617;
   --border-subtle: rgba(148, 163, 184, 0.4);
-  --text: #0f172a;
-  --text-soft: #4b5563;
-  --text-soft-2: #6b7280;
-  --accent-soft: rgba(79, 70, 229, 0.12);
-  --shadow-soft: 0 22px 60px rgba(148, 163, 184, 0.45);
+  --text: #e5e7eb;
+  --text-soft: #cbd5f5;
+  --text-soft-2: #9ca3af;
+  --accent-soft: rgba(79, 70, 229, 0.2);
+  --shadow-soft: 0 22px 60px rgba(15, 23, 42, 0.8);
 }
 
 /* Reset */
-
 *,
 *::before,
 *::after {
@@ -59,8 +52,8 @@ body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   background:
-    radial-gradient(circle at 0% 0%, #0f172a 0, #020617 45%, #020617 100%),
-    radial-gradient(circle at 100% 0%, #111827 0, #020617 55%, #000 100%);
+    radial-gradient(circle at 0% 0%, #0b1120 0, #020617 45%, #020617 100%),
+    radial-gradient(circle at 100% 0%, #1e3a8a 0, #020617 55%, #000 100%);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -81,7 +74,6 @@ button {
 }
 
 /* Layout */
-
 .container {
   width: min(1120px, 100% - 2.5rem);
   margin: 0 auto;
@@ -92,7 +84,12 @@ button {
 }
 
 .section-alt {
-  background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+  background: radial-gradient(
+    circle at top left,
+    #020617 0,
+    #020617 40%,
+    #020617 100%
+  );
 }
 
 @media (max-width: 768px) {
@@ -102,7 +99,6 @@ button {
 }
 
 /* Navbar */
-
 .navbar {
   position: fixed;
   inset: 0 0 auto 0;
@@ -128,6 +124,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: min(1120px, 100% - 2.5rem);
+  margin: 0 auto;
 }
 
 .nav-brand {
@@ -166,7 +164,6 @@ button {
 }
 
 /* Nav menu */
-
 .nav-menu {
   list-style: none;
   display: flex;
@@ -208,7 +205,6 @@ button {
 }
 
 /* Theme toggle */
-
 .nav-theme-toggle {
   border: 1px solid rgba(148, 163, 184, 0.3);
   border-radius: 999px;
@@ -231,7 +227,6 @@ button {
 }
 
 /* Hamburger */
-
 .nav-toggle {
   display: none;
   width: 32px;
@@ -259,15 +254,16 @@ button {
 .nav-toggle.active span:nth-child(1) {
   transform: translateY(4px) rotate(45deg);
 }
+
 .nav-toggle.active span:nth-child(2) {
   opacity: 0;
 }
+
 .nav-toggle.active span:nth-child(3) {
   transform: translateY(-4px) rotate(-45deg);
 }
 
 /* Scroll progress bar */
-
 #scrollProgressBar {
   position: absolute;
   left: 0;
@@ -278,7 +274,6 @@ button {
 }
 
 /* Mobile nav */
-
 @media (max-width: 768px) {
   .nav-menu {
     position: absolute;
@@ -315,7 +310,6 @@ button {
 }
 
 /* Hero */
-
 .hero-section {
   position: relative;
   padding-top: calc(var(--nav-height) + 40px);
@@ -325,9 +319,10 @@ button {
   align-items: center;
   background:
     radial-gradient(circle at 0% 0%, #0b1120 0, #020617 45%, #020617 100%),
-    radial-gradient(circle at 100% 0%, #020617 0, #020617 55%, #000 100%);
+    radial-gradient(circle at 100% 0%, #1e3a8a 0, #020617 55%, #000 100%);
 }
 
+/* hero background container */
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -336,7 +331,6 @@ button {
 }
 
 /* background gradients / network */
-
 .hero-gradient {
   position: absolute;
   inset: -20%;
@@ -348,7 +342,6 @@ button {
 }
 
 /* animated blue network */
-
 .data-network-layer {
   position: absolute;
   inset: 0;
@@ -409,18 +402,14 @@ button {
   animation: electricFlow 2.6s linear infinite;
 }
 
-/* offset timings so not all lines sync */
+/* offset timings */
 .link-2::before { animation-delay: 0.4s; }
 .link-3::before { animation-delay: 0.9s; }
 .link-4::before { animation-delay: 1.3s; }
 
 @keyframes electricFlow {
-  0% {
-    transform: translateX(-120%);
-  }
-  100% {
-    transform: translateX(140%);
-  }
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(140%); }
 }
 
 @keyframes nodePulse {
@@ -435,7 +424,6 @@ button {
 }
 
 /* hero orbits */
-
 .hero-orbit {
   position: absolute;
   border-radius: 999px;
@@ -463,6 +451,7 @@ button {
   left: 12%;
 }
 
+/* hero layout */
 .hero-grid {
   position: relative;
   display: grid;
@@ -548,7 +537,6 @@ button {
 }
 
 /* hero now line */
-
 .hero-now {
   margin-top: 0.4rem;
   font-size: 0.86rem;
@@ -563,7 +551,6 @@ button {
 }
 
 /* Buttons */
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -605,7 +592,6 @@ button {
 }
 
 /* Hero metrics */
-
 .hero-metrics {
   margin-top: 2.1rem;
   display: grid;
@@ -662,7 +648,6 @@ button {
 }
 
 /* Hero visual */
-
 .hero-visual {
   position: relative;
   z-index: 1;
@@ -691,7 +676,6 @@ button {
 }
 
 /* blue profile border & glow */
-
 .hero-avatar {
   position: relative;
   width: 84px;
@@ -774,7 +758,6 @@ button {
 }
 
 /* Scroll down */
-
 .scroll-down {
   position: absolute;
   left: 50%;
@@ -804,17 +787,19 @@ button {
 }
 
 /* Hero responsive */
-
 @media (max-width: 920px) {
   .hero-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+
   .hero-visual {
     justify-content: flex-start;
   }
+
   .hero-section {
     padding-top: calc(var(--nav-height) + 16px);
   }
+
   .hero-metrics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -827,7 +812,6 @@ button {
 }
 
 /* Section headers */
-
 .section-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -855,7 +839,6 @@ button {
 }
 
 /* About */
-
 .about-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
@@ -900,7 +883,6 @@ button {
 }
 
 /* Timeline */
-
 .timeline {
   border-radius: var(--radius-lg);
   background: rgba(15, 23, 42, 0.8);
@@ -962,7 +944,6 @@ button {
 }
 
 /* Certifications strip stacked */
-
 .cert-strip {
   margin-top: 1rem;
   padding-top: 0.7rem;
@@ -989,7 +970,6 @@ button {
 }
 
 /* About responsive */
-
 @media (max-width: 880px) {
   .about-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -997,7 +977,6 @@ button {
 }
 
 /* Experience */
-
 .exp-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1060,7 +1039,6 @@ button {
 }
 
 /* Experience responsive */
-
 @media (max-width: 960px) {
   .exp-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1074,7 +1052,6 @@ button {
 }
 
 /* Projects */
-
 .project-tabs {
   display: inline-flex;
   flex-wrap: wrap;
@@ -1200,7 +1177,6 @@ button {
 }
 
 /* Projects responsive */
-
 @media (max-width: 1024px) {
   .projects-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1211,6 +1187,7 @@ button {
   .projects-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+
   .project-tabs {
     display: flex;
     flex-wrap: wrap;
@@ -1218,7 +1195,6 @@ button {
 }
 
 /* Skills */
-
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1251,7 +1227,6 @@ button {
 }
 
 /* Skills responsive */
-
 @media (max-width: 960px) {
   .skills-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1265,7 +1240,6 @@ button {
 }
 
 /* Contact */
-
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.1fr);
@@ -1353,7 +1327,6 @@ button {
 }
 
 /* Contact form */
-
 .contact-form-wrapper {
   border-radius: var(--radius-lg);
   background: rgba(15, 23, 42, 0.95);
@@ -1425,7 +1398,6 @@ select:focus {
 }
 
 /* Contact responsive */
-
 @media (max-width: 880px) {
   .contact-grid {
     grid-template-columns: minmax(0, 1fr);
@@ -1439,7 +1411,6 @@ select:focus {
 }
 
 /* Footer */
-
 .footer {
   padding: 1.7rem 0 2.4rem;
   border-top: 1px solid rgba(148, 163, 184, 0.25);
@@ -1471,7 +1442,6 @@ select:focus {
 }
 
 /* Reveal animations */
-
 .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -1486,7 +1456,6 @@ select:focus {
 }
 
 /* Click sparks */
-
 .spark {
   position: fixed;
   width: 10px;
