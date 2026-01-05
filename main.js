@@ -281,7 +281,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       setFormStatus("Sending your message…", "info");
-      // Formspree handles the actual submit
     });
   }
+
+  // Parallax for data network
+  const networkLayer = document.querySelector(".data-network-layer");
+
+  window.addEventListener("scroll", () => {
+    if (!networkLayer) return;
+    const scrollY = window.scrollY;
+    const offset = scrollY * 0.03;
+    const scale = 1 + scrollY * 0.00015;
+    networkLayer.style.transform = `translateY(${offset}px) scale(${scale})`;
+  });
 });
