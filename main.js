@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? "fa-solid fa-sun"
       : "fa-solid fa-moon";
   }
+
   updateThemeIcon();
 
   if (themeToggle) {
@@ -38,29 +39,31 @@ document.addEventListener("DOMContentLoaded", () => {
       navToggle.classList.toggle("active");
       navMenu.classList.toggle("active");
     });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (navMenu.classList.contains("active")) {
+          navToggle.classList.remove("active");
+          navMenu.classList.remove("active");
+        }
+      });
+    });
   }
 
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (navToggle && navMenu && navMenu.classList.contains("active")) {
-        navToggle.classList.remove("active");
-        navMenu.classList.remove("active");
-      }
-    });
-  });
-
-  // Active nav + scroll progress
+  // Active nav & scroll progress
   const sections = document.querySelectorAll("section[id]");
 
   function markActiveNav() {
     const scrollY = window.pageYOffset + 120;
+
     sections.forEach((section) => {
       const id = section.getAttribute("id");
       const top = section.offsetTop;
       const height = section.offsetHeight;
       const inView = scrollY >= top && scrollY < top + height;
+
       navLinks.forEach((link) => {
-        if (link.getAttribute("href") === "#" + id) {
+        if (link.getAttribute("href") === `#${id}`) {
           link.classList.toggle("active", inView);
         }
       });
@@ -77,8 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (progressBar) {
       const doc = document.documentElement;
       const scrollHeight = doc.scrollHeight - doc.clientHeight;
-      const scrolled = scrollHeight > 0 ? (window.pageYOffset / scrollHeight) * 100 : 0;
-      progressBar.style.width = scrolled + "%";
+      const scrolled =
+        scrollHeight > 0 ? (window.pageYOffset / scrollHeight) * 100 : 0;
+      progressBar.style.width = `${scrolled}%`;
     }
 
     markActiveNav();
@@ -87,26 +91,31 @@ document.addEventListener("DOMContentLoaded", () => {
   markActiveNav();
 
   // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  document.querySelectorAll("a[href^='#']").forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
       const id = anchor.getAttribute("href");
       if (!id || id === "#") return;
       const target = document.querySelector(id);
       if (!target) return;
+
       e.preventDefault();
       const offset = target.offsetTop - 72;
-      window.scrollTo({ top: offset, behavior: "smooth" });
+      window.scrollTo({
+        top: offset,
+        behavior: "smooth",
+      });
     });
   });
 
   // Typewriter
   const typewriterEl = document.getElementById("typewriter");
+
   if (typewriterEl) {
     const roles = [
-      "Data Science & AI Engineer",
-      "ML/DL Engineer",
-      "NLP & RAG Practitioner",
-      "Full‑Stack AI Prototype Builder",
+      "Data Science",
+      "AI/ML Engineer",
+      "NLP RAG Practitioner",
+      "Data Analyst",
     ];
     let roleIndex = 0;
     let charIndex = 0;
@@ -128,7 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
         roleIndex = (roleIndex + 1) % roles.length;
       }
 
-      setTimeout(type, deleting ? 45 : 95);
+      const speed = deleting ? 45 : 95;
+      setTimeout(type, speed);
     }
 
     setTimeout(type, 600);
@@ -136,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Reveal on scroll
   const revealEls = document.querySelectorAll(".reveal");
+
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -148,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { threshold: 0.18 }
     );
+
     revealEls.forEach((el) => observer.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add("visible"));
@@ -155,25 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Metrics counter
   const metricEls = document.querySelectorAll(".metric-value");
-  if (metricEls.length && "IntersectionObserver" in window) {
-    const statsObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const target = parseFloat(el.dataset.target || "0");
-          const decimals =
-            el.dataset.target && el.dataset.target.includes(".")
-              ? el.dataset.target.split(".")[1].length
-              : 0;
-          animateNumber(el, target, decimals);
-          statsObserver.unobserve(el);
-        });
-      },
-      { threshold: 0.45 }
-    );
-    metricEls.forEach((el) => statsObserver.observe(el));
-  }
 
   function animateNumber(el, target, decimals) {
     let current = 0;
@@ -189,8 +182,28 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(timer);
       }
       el.textContent =
-        decimals > 0 ? current.toFixed(decimals) : Math.round(current);
+        decimals === 0 ? Math.round(current) : current.toFixed(decimals);
     }, stepTime);
+  }
+
+  if (metricEls.length && "IntersectionObserver" in window) {
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseFloat(el.dataset.target || "0");
+          const decimals = el.dataset.target.includes(".")
+            ? el.dataset.target.split(".")[1].length
+            : 0;
+          animateNumber(el, target, decimals);
+          statsObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.45 }
+    );
+
+    metricEls.forEach((el) => statsObserver.observe(el));
   }
 
   // Project filter
@@ -206,8 +219,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       projectCards.forEach((card) => {
         const category = card.dataset.category || "";
-        const categories = category.split(/\s+/);
-        const show = filter === "all" ? true : categories.includes(filter.toLowerCase());
+        const categories = category.split(" ");
+        const show =
+          filter === "all" || categories.includes(filter.toLowerCase());
         card.style.display = show ? "block" : "none";
       });
     });
@@ -215,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Tilt hero card
   const tiltCard = document.querySelector(".tilt-card");
+
   if (tiltCard) {
     tiltCard.addEventListener("mousemove", (e) => {
       const rect = tiltCard.getBoundingClientRect();
@@ -222,14 +237,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = (y - centerY) / 18;
-      const rotateY = (centerX - x) / 18;
-      tiltCard.style.transform = `
-        perspective(900px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        translateY(-4px)
-      `;
+
+      const rotateX = ((y - centerY) / centerY) * 8;
+      const rotateY = ((centerX - x) / centerX) * 8;
+
+      tiltCard.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
 
     tiltCard.addEventListener("mouseleave", () => {
@@ -238,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Contact form (Formspree validation)
+  // Contact form – Formspree validation
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
 
@@ -246,11 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!formStatus) return;
     formStatus.textContent = message;
     formStatus.style.color =
-      type === "error"
-        ? "#ef4444"
-        : type === "success"
-        ? "#4ade80"
-        : "#9ca3af";
+      type === "error" ? "#ef4444" : type === "success" ? "#4ade80" : "#9ca3af";
   }
 
   if (contactForm) {
@@ -273,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       setFormStatus("Sending your message…", "info");
-      // allow submit to Formspree
+      // Formspree will handle the actual submit
     });
   }
 });
