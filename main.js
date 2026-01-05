@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(type, 600);
   }
-  
+
   // Reveal on scroll
   const revealEls = document.querySelectorAll(".reveal");
 
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       setFormStatus("Sending your message…", "info");
-      // Formspree will handle the actual submit
+      // Formspree handles the actual submit
     });
   }
 });
