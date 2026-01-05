@@ -287,17 +287,17 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Click sparks */
 
   document.addEventListener("click", (e) => {
-    // If you ever want to ignore clicks on buttons/links, uncomment:
+    // if you want to ignore clicks on controls, uncomment:
     // if (e.target.closest("button, a, input, textarea, select")) return;
 
     const spark = document.createElement("div");
     spark.className = "spark";
-    spark.style.left = `${e.clientX - 4}px`;
-    spark.style.top = `${e.clientY - 4}px`;
+    spark.style.left = `${e.clientX - 5}px`;
+    spark.style.top = `${e.clientY - 5}px`;
     document.body.appendChild(spark);
 
     setTimeout(() => {
       spark.remove();
-    }, 650);
+    }, 700);
   });
 });
