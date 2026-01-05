@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("themeToggle");
   const progressBar = document.getElementById("scrollProgressBar");
 
-  // Theme toggle
+  /* Theme toggle */
   const storedTheme = localStorage.getItem("eshan-theme");
   if (storedTheme === "light") {
     body.classList.add("light");
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Mobile nav
+  /* Mobile nav */
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", () => {
       navToggle.classList.toggle("active");
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Active nav & scroll progress
+  /* Active nav & scroll progress */
   const sections = document.querySelectorAll("section[id]");
 
   function markActiveNav() {
@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = section.getAttribute("id");
       const top = section.offsetTop;
       const height = section.offsetHeight;
-      const inView = scrollY >= top && scrollY < top + height;
 
+      const inView = scrollY >= top && scrollY < top + height;
       navLinks.forEach((link) => {
         if (link.getAttribute("href") === `#${id}`) {
           link.classList.toggle("active", inView);
@@ -90,31 +90,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   markActiveNav();
 
-  // Smooth scroll
-  document.querySelectorAll("a[href^='#']").forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      const id = anchor.getAttribute("href");
-      if (!id || id === "#") return;
-      const target = document.querySelector(id);
-      if (!target) return;
+  /* Smooth scroll */
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach((anchor) =>
+      anchor.addEventListener("click", (e) => {
+        const id = anchor.getAttribute("href");
+        if (!id || id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
 
-      e.preventDefault();
-      const offset = target.offsetTop - 72;
-      window.scrollTo({
-        top: offset,
-        behavior: "smooth",
-      });
-    });
-  });
+        e.preventDefault();
+        const offset = target.offsetTop - 72;
+        window.scrollTo({
+          top: offset,
+          behavior: "smooth",
+        });
+      })
+    );
 
-  // Typewriter
+  /* Typewriter */
   const typewriterEl = document.getElementById("typewriter");
-
   if (typewriterEl) {
     const roles = [
       "Data Scientist",
-      "AI/ML Engineer",
-      "NLP RAG Practitioner",
+      "AIML Engineer",
+      "NLP & RAG Practitioner",
       "Data Analyst",
     ];
     let roleIndex = 0;
@@ -144,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(type, 600);
   }
 
-  // Reveal on scroll
+  /* Reveal on scroll */
   const revealEls = document.querySelectorAll(".reveal");
 
   if ("IntersectionObserver" in window) {
@@ -165,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     revealEls.forEach((el) => el.classList.add("visible"));
   }
 
-  // Metrics counter
+  /* Metrics counter */
   const metricEls = document.querySelectorAll(".metric-value");
 
   function animateNumber(el, target, decimals) {
@@ -206,11 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
     metricEls.forEach((el) => statsObserver.observe(el));
   }
 
-  // Project filter
+  /* Project filter */
   const projectTabs = document.querySelectorAll(".project-tab");
   const projectCards = document.querySelectorAll(".project-card");
 
-  projectTabs.forEach((tab) => {
+  projectTabs.forEach((tab) =>
     tab.addEventListener("click", () => {
       const filter = tab.dataset.filter || "all";
 
@@ -224,12 +225,11 @@ document.addEventListener("DOMContentLoaded", () => {
           filter === "all" || categories.includes(filter.toLowerCase());
         card.style.display = show ? "block" : "none";
       });
-    });
-  });
+    })
+  );
 
-  // Tilt hero card
+  /* Tilt hero card */
   const tiltCard = document.querySelector(".tilt-card");
-
   if (tiltCard) {
     tiltCard.addEventListener("mousemove", (e) => {
       const rect = tiltCard.getBoundingClientRect();
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Contact form – Formspree validation
+  /* Contact form validation */
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
 
@@ -258,7 +258,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!formStatus) return;
     formStatus.textContent = message;
     formStatus.style.color =
-      type === "error" ? "#ef4444" : type === "success" ? "#4ade80" : "#9ca3af";
+      type === "error"
+        ? "#ef4444"
+        : type === "success"
+        ? "#4ade80"
+        : "#9ca3af";
   }
 
   if (contactForm) {
@@ -284,14 +288,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Parallax for data network
+  /* Parallax for data network */
   const networkLayer = document.querySelector(".data-network-layer");
-
   window.addEventListener("scroll", () => {
     if (!networkLayer) return;
     const scrollY = window.scrollY;
     const offset = scrollY * 0.03;
     const scale = 1 + scrollY * 0.00015;
     networkLayer.style.transform = `translateY(${offset}px) scale(${scale})`;
+  });
+
+  /* Electric sparks on touch/click */
+  function createSpark(x, y) {
+    const spark = document.createElement("div");
+    spark.className = "spark";
+    spark.style.left = `${x}px`;
+    spark.style.top = `${y}px`;
+    document.body.appendChild(spark);
+
+    spark.addEventListener("animationend", () => {
+      spark.remove();
+    });
+  }
+
+  window.addEventListener("pointerdown", (e) => {
+    createSpark(e.clientX, e.clientY);
   });
 });
