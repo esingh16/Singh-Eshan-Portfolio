@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (typewriterEl) {
     const roles = [
-      "Data Science",
+      "Data Scientist",
       "AI/ML Engineer",
       "NLP RAG Practitioner",
       "Data Analyst",
