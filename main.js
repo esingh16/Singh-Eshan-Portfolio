@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(type, 600);
   }
-
+  
   // Reveal on scroll
   const revealEls = document.querySelectorAll(".reveal");
 
