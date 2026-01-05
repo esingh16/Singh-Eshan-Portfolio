@@ -287,9 +287,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* Click sparks */
 
   document.addEventListener("click", (e) => {
-    // if you want to ignore clicks on controls, uncomment:
-    // if (e.target.closest("button, a, input, textarea, select")) return;
-
     const spark = document.createElement("div");
     spark.className = "spark";
     spark.style.left = `${e.clientX - 5}px`;
@@ -300,4 +297,115 @@ document.addEventListener("DOMContentLoaded", () => {
       spark.remove();
     }, 700);
   });
+
+  /* Dynamic canvas network background */
+
+  const canvas = document.getElementById("networkCanvas");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    const config = {
+      count: 90,
+      maxVelocity: 0.3,
+      linkDistance: 150,
+    };
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
+      ctx.setTransform(
+        window.devicePixelRatio,
+        0,
+        0,
+        window.devicePixelRatio,
+        0,
+        0
+      );
+    }
+
+    function initParticles() {
+      particles = [];
+      const rect = canvas.getBoundingClientRect();
+      for (let i = 0; i < config.count; i++) {
+        particles.push({
+          x: Math.random() * rect.width,
+          y: Math.random() * rect.height,
+          vx: (Math.random() - 0.5) * config.maxVelocity,
+          vy: (Math.random() - 0.5) * config.maxVelocity,
+        });
+      }
+    }
+
+    function draw() {
+      const rect = canvas.getBoundingClientRect();
+      ctx.clearRect(0, 0, rect.width, rect.height);
+
+      // Electric links
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < config.linkDistance) {
+            const alpha = 1 - dist / config.linkDistance;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha * 0.9})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Glowing particles
+      for (const p of particles) {
+        const gradient = ctx.createRadialGradient(
+          p.x,
+          p.y,
+          0,
+          p.x,
+          p.y,
+          6
+        );
+        gradient.addColorStop(0, "rgba(191, 219, 254, 1)");
+        gradient.addColorStop(0.4, "rgba(56, 189, 248, 0.9)");
+        gradient.addColorStop(1, "rgba(15, 23, 42, 0)");
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function update() {
+      const rect = canvas.getBoundingClientRect();
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // wrap softly at edges
+        if (p.x < -20) p.x = rect.width + 20;
+        if (p.x > rect.width + 20) p.x = -20;
+        if (p.y < -20) p.y = rect.height + 20;
+        if (p.y > rect.height + 20) p.y = -20;
+      }
+    }
+
+    function loop() {
+      update();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    resizeCanvas();
+    initParticles();
+    loop();
+
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      initParticles();
+    });
+  }
 });
