@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const progressBar = document.getElementById("scrollProgressBar");
 
   /* Theme toggle */
-
   const storedTheme = localStorage.getItem("eshan-theme");
   if (storedTheme === "light") {
     body.classList.add("light");
@@ -35,31 +34,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* Mobile nav */
-
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", () => {
       navToggle.classList.toggle("active");
       navMenu.classList.toggle("active");
     });
-  }
 
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (!navToggle || !navMenu) return;
-      if (navMenu.classList.contains("active")) {
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (!navMenu.classList.contains("active")) return;
         navToggle.classList.remove("active");
         navMenu.classList.remove("active");
-      }
+      });
     });
-  });
+  }
 
   /* Active nav & scroll progress */
-
   const sections = document.querySelectorAll("section[id]");
 
   function markActiveNav() {
     const scrollY = window.pageYOffset + 120;
-
     sections.forEach((section) => {
       const id = section.getAttribute("id");
       const top = section.offsetTop;
@@ -76,9 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 10) {
-      navbar?.classList.add("scrolled");
-    } else {
-      navbar?.classList.remove("scrolled");
+      if (navbar) navbar.classList.add("scrolled");
+    } else if (navbar) {
+      navbar.classList.remove("scrolled");
     }
 
     if (progressBar) {
@@ -95,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
   markActiveNav();
 
   /* Smooth scroll */
-
   document
     .querySelectorAll('a[href^="#"]')
     .forEach((anchor) =>
@@ -111,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
   /* Typewriter */
-
   const typewriterEl = document.getElementById("typewriter");
   if (typewriterEl) {
     const roles = [
@@ -147,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* Reveal on scroll */
-
   const revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
@@ -161,14 +152,34 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { threshold: 0.18 }
     );
+
     revealEls.forEach((el) => observer.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add("visible"));
   }
 
   /* Metrics counter */
-
   const metricEls = document.querySelectorAll(".metric-value");
+
+  function animateNumber(el, target, decimals) {
+    let current = 0;
+    const frames = 80;
+    const increment = target / frames;
+    const duration = 1500;
+    const stepTime = duration / frames;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+
+      el.textContent =
+        decimals === 0 ? Math.round(current) : current.toFixed(decimals);
+    }, stepTime);
+  }
+
   if (metricEls.length && "IntersectionObserver" in window) {
     const statsObserver = new IntersectionObserver(
       (entries) => {
@@ -189,33 +200,13 @@ document.addEventListener("DOMContentLoaded", () => {
     metricEls.forEach((el) => statsObserver.observe(el));
   }
 
-  function animateNumber(el, target, decimals) {
-    let current = 0;
-    const frames = 80;
-    const increment = target / frames;
-    const duration = 1500;
-    const stepTime = duration / frames;
-
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        current = target;
-        clearInterval(timer);
-      }
-      el.textContent =
-        decimals === 0 ? Math.round(current) : current.toFixed(decimals);
-    }, stepTime);
-  }
-
   /* Project filter */
-
   const projectTabs = document.querySelectorAll(".project-tab");
   const projectCards = document.querySelectorAll(".project-card");
 
   projectTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const filter = tab.dataset.filter || "all";
-
       projectTabs.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
 
@@ -229,7 +220,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* Tilt hero card */
-
   const tiltCard = document.querySelector(".tilt-card");
   if (tiltCard) {
     tiltCard.addEventListener("mousemove", (e) => {
@@ -240,7 +230,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const centerY = rect.height / 2;
       const rotateX = ((y - centerY) / centerY) * -8;
       const rotateY = ((x - centerX) / centerX) * 8;
-      tiltCard.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      tiltCard.style.transform =
+        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
 
     tiltCard.addEventListener("mouseleave", () => {
@@ -250,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* Contact form validation */
-
   const contactForm = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
 
@@ -258,7 +248,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!formStatus) return;
     formStatus.textContent = message;
     formStatus.style.color =
-      type === "error" ? "#ef4444" : type === "success" ? "#4ade80" : "#9ca3af";
+      type === "error"
+        ? "#ef4444"
+        : type === "success"
+        ? "#4ade80"
+        : "#9ca3af";
   }
 
   if (contactForm) {
@@ -285,17 +279,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* Click sparks */
-
   document.addEventListener("click", (e) => {
-    // if you want to ignore clicks on controls, uncomment:
-    // if (e.target.closest("button, a, input, textarea, select")) return;
-
     const spark = document.createElement("div");
     spark.className = "spark";
     spark.style.left = `${e.clientX - 5}px`;
     spark.style.top = `${e.clientY - 5}px`;
     document.body.appendChild(spark);
-
     setTimeout(() => {
       spark.remove();
     }, 700);
