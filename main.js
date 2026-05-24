@@ -1,254 +1,223 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const body      = document.body;
-  const navbar    = document.getElementById("navbar");
-  const navToggle = document.getElementById("navToggle");
-  const navMenu   = document.getElementById("navMenu");
-  const navLinks  = document.querySelectorAll(".nav-link");
-  const themeToggle = document.getElementById("themeToggle");
-  const progressBar = document.getElementById("scrollProgressBar");
+  /* ── Elements ──────────────────────────── */
+  const body       = document.body;
+  const nav        = document.getElementById("nav");
+  const burger     = document.getElementById("navBurger");
+  const navLinks   = document.getElementById("navLinks");
+  const nls        = document.querySelectorAll(".nl");
+  const themeBtn   = document.getElementById("themeBtn");
+  const progressBar = document.getElementById("progress-bar");
 
-  /* ── Theme ──────────────────────────────── */
-  const storedTheme = localStorage.getItem("eshan-theme");
-  if (storedTheme === "light") body.classList.add("light");
-
-  function updateThemeIcon() {
-    if (!themeToggle) return;
-    const icon = themeToggle.querySelector("i");
+  /* ── Dark mode (saved preference) ──────── */
+  if (localStorage.getItem("es-theme") === "dark") {
+    body.classList.add("dark");
+  }
+  function syncThemeIcon() {
+    if (!themeBtn) return;
+    const icon = themeBtn.querySelector("i");
     if (!icon) return;
-    icon.className = body.classList.contains("light")
+    icon.className = body.classList.contains("dark")
       ? "fa-solid fa-sun"
       : "fa-solid fa-moon";
   }
-  updateThemeIcon();
+  syncThemeIcon();
 
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      body.classList.toggle("light");
-      localStorage.setItem("eshan-theme", body.classList.contains("light") ? "light" : "dark");
-      updateThemeIcon();
-    });
-  }
+  themeBtn?.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    localStorage.setItem("es-theme", body.classList.contains("dark") ? "dark" : "light");
+    syncThemeIcon();
+  });
 
   /* ── Mobile nav ─────────────────────────── */
-  if (navToggle && navMenu) {
-    navToggle.addEventListener("click", () => {
-      navToggle.classList.toggle("active");
-      navMenu.classList.toggle("active");
-    });
-    navLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        navToggle.classList.remove("active");
-        navMenu.classList.remove("active");
-      });
-    });
-  }
+  burger?.addEventListener("click", () => {
+    burger.classList.toggle("open");
+    navLinks.classList.toggle("open");
+  });
+  nls.forEach(nl => nl.addEventListener("click", () => {
+    burger.classList.remove("open");
+    navLinks.classList.remove("open");
+  }));
 
-  /* ── Scroll behaviours ───────────────────── */
+  /* ── Scroll: progress + nav ─────────────── */
   const sections = document.querySelectorAll("section[id]");
 
-  function markActiveNav() {
-    const scrollY = window.pageYOffset + 130;
-    sections.forEach(section => {
-      const id     = section.getAttribute("id");
-      const top    = section.offsetTop;
-      const height = section.offsetHeight;
-      const inView = scrollY >= top && scrollY < top + height;
-      navLinks.forEach(link => {
-        if (link.getAttribute("href") === `#${id}`) {
-          link.classList.toggle("active", inView);
-        }
-      });
-    });
-  }
+  function onScroll() {
+    const sy = window.scrollY;
 
-  window.addEventListener("scroll", () => {
-    // Navbar
-    if (navbar) {
-      navbar.classList.toggle("scrolled", window.scrollY > 12);
-    }
+    // Navbar shadow
+    nav?.classList.toggle("scrolled", sy > 10);
 
     // Progress bar
     if (progressBar) {
-      const doc = document.documentElement;
-      const scrollH = doc.scrollHeight - doc.clientHeight;
-      const pct = scrollH > 0 ? (window.pageYOffset / scrollH) * 100 : 0;
-      progressBar.style.width = `${pct}%`;
+      const d = document.documentElement;
+      const total = d.scrollHeight - d.clientHeight;
+      progressBar.style.width = total > 0 ? `${(sy / total) * 100}%` : "0%";
     }
 
-    markActiveNav();
-  }, { passive: true });
+    // Active nav link
+    const scrollY = sy + 120;
+    sections.forEach(section => {
+      const id = section.id;
+      const top = section.offsetTop;
+      const inView = scrollY >= top && scrollY < top + section.offsetHeight;
+      nls.forEach(nl => {
+        if (nl.getAttribute("href") === `#${id}`) nl.classList.toggle("active", inView);
+      });
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
-  markActiveNav();
-
-  /* ── Smooth scroll ───────────────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", e => {
-      const id = anchor.getAttribute("href");
+  /* ── Smooth scroll ──────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", e => {
+      const id = a.getAttribute("href");
       if (!id || id === "#") return;
       const target = document.querySelector(id);
       if (!target) return;
       e.preventDefault();
-      window.scrollTo({ top: target.offsetTop - 72, behavior: "smooth" });
+      window.scrollTo({ top: target.offsetTop - 70, behavior: "smooth" });
     });
   });
 
-  /* ── Typewriter ──────────────────────────── */
-  const typewriterEl = document.getElementById("typewriter");
-  if (typewriterEl) {
+  /* ── Typewriter ─────────────────────────── */
+  const tw = document.getElementById("typewriter");
+  if (tw) {
     const roles = [
       "Data Scientist",
       "AI/ML Engineer",
-      "NLP & RAG Practitioner",
+      "NLP and RAG Practitioner",
       "Agentic AI Builder",
       "Data Analyst",
     ];
-    let ri = 0, ci = 0, deleting = false;
-
-    function type() {
-      const current = roles[ri];
-      ci += deleting ? -1 : 1;
-      typewriterEl.textContent = current.slice(0, ci);
-
-      if (!deleting && ci === current.length) {
-        deleting = true;
-        setTimeout(type, 2000);
-        return;
-      }
-      if (deleting && ci === 0) {
-        deleting = false;
-        ri = (ri + 1) % roles.length;
-      }
-      setTimeout(type, deleting ? 40 : 90);
+    let ri = 0, ci = 0, del = false;
+    function tick() {
+      const cur = roles[ri];
+      ci += del ? -1 : 1;
+      tw.textContent = cur.slice(0, ci);
+      if (!del && ci === cur.length) { del = true; setTimeout(tick, 2000); return; }
+      if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+      setTimeout(tick, del ? 40 : 88);
     }
-    setTimeout(type, 700);
+    setTimeout(tick, 700);
   }
 
-  /* ── Reveal on scroll ────────────────────── */
-  const revealEls = document.querySelectorAll(".reveal");
+  /* ── Reveal on scroll ───────────────────── */
+  const revEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
+    const obs = new IntersectionObserver(
       entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add("visible");
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }
       }),
-      { threshold: 0.14 }
+      { threshold: 0.12 }
     );
-    revealEls.forEach(el => observer.observe(el));
+    revEls.forEach(el => obs.observe(el));
   } else {
-    revealEls.forEach(el => el.classList.add("visible"));
+    revEls.forEach(el => el.classList.add("visible"));
   }
 
-  /* ── Metrics counter ─────────────────────── */
-  const metricEls = document.querySelectorAll(".metric-value");
-
-  function animateNumber(el, target, decimals) {
-    let current = 0;
-    const frames = 70, stepTime = 1400 / frames, inc = target / frames;
-    const timer = setInterval(() => {
-      current = Math.min(current + inc, target);
-      el.textContent = decimals === 0 ? Math.round(current) : current.toFixed(decimals);
-      if (current >= target) clearInterval(timer);
-    }, stepTime);
+  /* ── Stat counters ──────────────────────── */
+  const statEls = document.querySelectorAll(".stat-num");
+  function animateNum(el, target, dec) {
+    let cur = 0;
+    const frames = 65, step = 1300 / frames, inc = target / frames;
+    const t = setInterval(() => {
+      cur = Math.min(cur + inc, target);
+      el.textContent = dec > 0 ? cur.toFixed(dec) : Math.round(cur);
+      if (cur >= target) clearInterval(t);
+    }, step);
   }
-
-  if (metricEls.length && "IntersectionObserver" in window) {
+  if ("IntersectionObserver" in window) {
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => {
         if (!e.isIntersecting) return;
-        const el  = e.target;
+        const el = e.target;
         const raw = el.dataset.target || "0";
         const dec = raw.includes(".") ? raw.split(".")[1].length : 0;
-        animateNumber(el, parseFloat(raw), dec);
+        animateNum(el, parseFloat(raw), dec);
         obs.unobserve(el);
       }),
       { threshold: 0.5 }
     );
-    metricEls.forEach(el => obs.observe(el));
+    statEls.forEach(el => obs.observe(el));
   }
 
-  /* ── Project filter ──────────────────────── */
-  const projectTabs  = document.querySelectorAll(".project-tab");
-  const projectCards = document.querySelectorAll(".project-card");
-
-  projectTabs.forEach(tab => {
+  /* ── Project filter ─────────────────────── */
+  const ptabs  = document.querySelectorAll(".ptab");
+  const pcards = document.querySelectorAll(".proj-card");
+  ptabs.forEach(tab => {
     tab.addEventListener("click", () => {
       const filter = tab.dataset.filter || "all";
-      projectTabs.forEach(t => t.classList.remove("active"));
+      ptabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
-
-      projectCards.forEach(card => {
+      pcards.forEach(card => {
         const cats = (card.dataset.category || "").split(" ");
-        const show = filter === "all" || cats.includes(filter.toLowerCase());
+        const show = filter === "all" || cats.includes(filter);
         card.style.display = show ? "" : "none";
       });
     });
   });
 
-  /* ── Tilt hero card ──────────────────────── */
-  const tiltCard = document.querySelector(".tilt-card");
-  if (tiltCard) {
-    tiltCard.addEventListener("mousemove", e => {
-      const rect = tiltCard.getBoundingClientRect();
-      const rx = ((e.clientY - rect.top)  / rect.height - 0.5) * 10;
-      const ry = ((e.clientX - rect.left) / rect.width  - 0.5) * -10;
-      tiltCard.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+  /* ── Tilt hero card ─────────────────────── */
+  const tilt = document.querySelector(".tilt-card");
+  if (tilt) {
+    tilt.addEventListener("mousemove", e => {
+      const r  = tilt.getBoundingClientRect();
+      const rx = ((e.clientY - r.top)  / r.height - 0.5) * 9;
+      const ry = ((e.clientX - r.left) / r.width  - 0.5) * -9;
+      tilt.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-5px)`;
     });
-    tiltCard.addEventListener("mouseleave", () => {
-      tiltCard.style.transform = "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
+    tilt.addEventListener("mouseleave", () => {
+      tilt.style.transform = "perspective(800px) rotateX(0) rotateY(0) translateY(0)";
     });
   }
 
-  /* ── Contact form ────────────────────────── */
-  const contactForm = document.getElementById("contactForm");
-  const formStatus  = document.getElementById("formStatus");
+  /* ── Contact form ───────────────────────── */
+  const form   = document.getElementById("contactForm");
+  const status = document.getElementById("formStatus");
+  const setStatus = (msg, type) => {
+    if (!status) return;
+    status.textContent = msg;
+    status.style.color = type === "error" ? "#ef4444" : type === "success" ? "#22c55e" : "#7a726a";
+  };
+  form?.addEventListener("submit", e => {
+    const name  = document.getElementById("name")?.value.trim();
+    const email = document.getElementById("emailInput")?.value.trim();
+    const type  = document.getElementById("type")?.value;
+    const msg   = document.getElementById("message")?.value.trim();
+    if (!name || !email || !type || !msg) { e.preventDefault(); setStatus("Please fill in all fields.", "error"); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { e.preventDefault(); setStatus("Please provide a valid email.", "error"); return; }
+    setStatus("Sending your message…", "");
+  });
 
-  function setFormStatus(msg, type = "info") {
-    if (!formStatus) return;
-    formStatus.textContent = msg;
-    formStatus.style.color = type === "error" ? "#f87171" : type === "success" ? "#34d399" : "#94a3b8";
-  }
-
-  if (contactForm) {
-    contactForm.addEventListener("submit", e => {
-      const name    = document.getElementById("name")?.value.trim();
-      const email   = document.getElementById("emailInput")?.value.trim();
-      const type    = document.getElementById("type")?.value;
-      const message = document.getElementById("message")?.value.trim();
-
-      if (!name || !email || !type || !message) {
-        e.preventDefault();
-        setFormStatus("Please fill in all fields.", "error");
-        return;
+  /* ── Grain canvas ───────────────────────── */
+  const canvas = document.getElementById("grain-canvas");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let w, h;
+    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener("resize", resize);
+    function drawGrain() {
+      const img = ctx.createImageData(w, h);
+      for (let i = 0; i < img.data.length; i += 4) {
+        const v = Math.random() * 255 | 0;
+        img.data[i] = img.data[i+1] = img.data[i+2] = v;
+        img.data[i+3] = 255;
       }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        e.preventDefault();
-        setFormStatus("Please provide a valid email address.", "error");
-        return;
-      }
-      setFormStatus("Sending your message…", "info");
-    });
+      ctx.putImageData(img, 0, 0);
+      requestAnimationFrame(drawGrain);
+    }
+    drawGrain();
   }
 
-  /* ── Parallax network layer ──────────────── */
-  const networkLayer = document.querySelector(".data-network-layer");
-  window.addEventListener("scroll", () => {
-    if (!networkLayer) return;
-    const offset = window.scrollY * 0.025;
-    const scale  = 1 + window.scrollY * 0.0001;
-    networkLayer.style.transform = `translateY(${offset}px) scale(${scale})`;
-  }, { passive: true });
-
-  /* ── Electric sparks ─────────────────────── */
-  function createSpark(x, y) {
+  /* ── Sparks on click ────────────────────── */
+  window.addEventListener("pointerdown", e => {
     const spark = document.createElement("div");
     spark.className = "spark";
-    spark.style.left = `${x}px`;
-    spark.style.top  = `${y}px`;
+    spark.style.left = `${e.clientX}px`;
+    spark.style.top  = `${e.clientY}px`;
     document.body.appendChild(spark);
     spark.addEventListener("animationend", () => spark.remove());
-  }
-
-  window.addEventListener("pointerdown", e => createSpark(e.clientX, e.clientY));
+  });
 });
