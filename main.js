@@ -421,4 +421,272 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { passive: true });
 
-});
+
+/* ═══════════════════════════════════════════════════
+   ESHAN AI CHATBOT v2
+   Proxy: Vercel /api/chat  →  Anthropic Claude
+   Smart intent detection · Markdown rendering · Streaming feel
+   ═══════════════════════════════════════════════════ */
+(function () {
+
+  /* ── IMPORTANT: update this after Vercel deploy ──────────────────────────
+     Replace with your actual Vercel URL, e.g.:
+     "https://singh-eshan-portfolio.vercel.app/api/chat"
+     While testing locally you can also use:
+     "http://localhost:3000/api/chat"
+  ── */
+  const PROXY_URL = "https://singh-eshan-portfolio.vercel.app/api/chat";
+
+  /* ── Conversation history (sent to API each time) ──── */
+  const history = [];
+  let isOpen    = false;
+  let isBusy    = false;
+  let msgCount  = 0;
+
+  /* ── Elements ───────────────────────────────────────── */
+  const widget     = document.getElementById("chat-widget");
+  const trigger    = document.getElementById("chat-trigger");
+  const closeBtn   = document.getElementById("chat-close");
+  const messagesEl = document.getElementById("chatMessages");
+  const inputEl    = document.getElementById("chatInput");
+  const sendBtn    = document.getElementById("chatSend");
+  const suggs      = document.getElementById("chatSuggestions");
+
+  if (!widget || !trigger) return;
+
+  /* ── Open / close ───────────────────────────────────── */
+  function openChat() {
+    isOpen = true;
+    widget.classList.add("open");
+    setTimeout(() => inputEl?.focus(), 350);
+  }
+  function closeChat() {
+    isOpen = false;
+    widget.classList.remove("open");
+  }
+
+  trigger.addEventListener("click", () => isOpen ? closeChat() : openChat());
+  closeBtn?.addEventListener("click", closeChat);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && isOpen) closeChat(); });
+
+  /* ── Quick chips ────────────────────────────────────── */
+  suggs?.querySelectorAll(".chat-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const q = chip.dataset.q;
+      if (q) sendMessage(q);
+      suggs.style.transition = "opacity 0.25s ease, max-height 0.3s ease";
+      suggs.style.opacity    = "0";
+      suggs.style.maxHeight  = "0";
+      setTimeout(() => { suggs.style.display = "none"; }, 300);
+    });
+  });
+
+  /* ── Input send ─────────────────────────────────────── */
+  sendBtn?.addEventListener("click", sendFromInput);
+  inputEl?.addEventListener("keydown", e => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendFromInput(); }
+  });
+
+  // Character counter hint
+  inputEl?.addEventListener("input", () => {
+    const len = inputEl.value.length;
+    if (len > 250) {
+      inputEl.style.borderColor = "var(--gold)";
+    } else {
+      inputEl.style.borderColor = "";
+    }
+  });
+
+  function sendFromInput() {
+    const text = inputEl.value.trim();
+    if (!text || isBusy) return;
+    inputEl.value = "";
+    inputEl.style.borderColor = "";
+    sendMessage(text);
+  }
+
+  /* ── Smart intent detector ──────────────────────────── */
+  function detectIntent(text) {
+    const t = text.toLowerCase();
+    if (/\b(hire|job|role|position|open to|available|internship|full.?time|work with)\b/.test(t))
+      return "hire";
+    if (/\b(project|built|made|created|deployed|complain|tod|care compass|safescan|career counsel|loan|disease|mnist)\b/.test(t))
+      return "project";
+    if (/\b(skill|know|tech|stack|language|python|ml|ai|framework|tool)\b/.test(t))
+      return "skill";
+    if (/\b(contact|email|phone|reach|linkedin|github|connect)\b/.test(t))
+      return "contact";
+    if (/\b(gpa|grade|university|umd|degree|education|study|college|pune)\b/.test(t))
+      return "education";
+    return "general";
+  }
+
+  /* ── Main send + proxy call ─────────────────────────── */
+  async function sendMessage(text) {
+    if (!text || isBusy) return;
+    isBusy = true;
+    isBusy = true;
+    sendBtn.disabled = true;
+    msgCount++;
+
+    // Hide chips on first real message
+    if (suggs && suggs.style.display !== "none") {
+      suggs.style.opacity   = "0";
+      suggs.style.maxHeight = "0";
+      setTimeout(() => { suggs.style.display = "none"; }, 300);
+    }
+
+    appendBubble("user", text);
+    history.push({ role: "user", content: text });
+
+    const typingId = appendTyping();
+
+    // Minimum typing delay so it doesn't feel instant (more human)
+    const minDelay = new Promise(r => setTimeout(r, 900));
+
+    try {
+      const [response] = await Promise.all([
+        fetch(PROXY_URL, {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify({ messages: history }),
+        }),
+        minDelay,
+      ]);
+
+      removeTyping(typingId);
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err?.error || `Server error ${response.status}`);
+      }
+
+      const data  = await response.json();
+      const reply = data?.reply || "Sorry, I couldn't get a response right now.";
+
+      history.push({ role: "assistant", content: reply });
+
+      // Render with basic markdown support
+      appendBubble("bot", reply, true);
+
+      // After every 3 messages, nudge toward contact
+      if (msgCount > 0 && msgCount % 4 === 0) {
+        setTimeout(() => {
+          appendBubble("bot",
+            "By the way — if you'd like to reach Eshan directly, " +
+            "drop him a line at esingh16@umd.edu or connect on LinkedIn! 🙌",
+            false
+          );
+        }, 1200);
+      }
+
+    } catch (err) {
+      removeTyping(typingId);
+      console.error("Chatbot error:", err);
+
+      let msg = "Hmm, something went wrong on my end. Try again in a moment!";
+      if (err.message?.includes("Failed to fetch") || err.message?.includes("NetworkError")) {
+        msg = "Can't reach the server right now — check your connection and try again.";
+      } else if (err.message?.includes("500")) {
+        msg = "The API key may not be configured yet on the server. Check Vercel env vars!";
+      } else if (err.message?.includes("overloaded")) {
+        msg = "Claude is a bit overloaded right now. Give it a few seconds and try again!";
+      }
+      appendBubble("bot", msg, false);
+    }
+
+    isBusy        = false;
+    sendBtn.disabled = false;
+    inputEl?.focus();
+  }
+
+  /* ── Lightweight markdown renderer ─────────────────── */
+  function renderMarkdown(text) {
+    // Bold: **text** or __text__
+    text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    text = text.replace(/__(.*?)__/g,     "<strong>$1</strong>");
+    // Italic: *text* or _text_
+    text = text.replace(/\*(.*?)\*/g, "<em>$1</em>");
+    text = text.replace(/_(.*?)_/g,   "<em>$1</em>");
+    // Inline code
+    text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+    // Links [label](url)
+    text = text.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g,
+      '<a href="$2" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">$1</a>'
+    );
+    // Line breaks
+    text = text.replace(/\n/g, "<br>");
+    return text;
+  }
+
+  /* ── DOM helpers ────────────────────────────────────── */
+  function getTime() {
+    return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function appendBubble(role, text, useMarkdown = false) {
+    const msg    = document.createElement("div");
+    msg.className = `chat-msg chat-msg-${role}`;
+
+    const bubble = document.createElement("div");
+    bubble.className = "chat-bubble";
+
+    if (useMarkdown && role === "bot") {
+      bubble.innerHTML = renderMarkdown(text);
+    } else {
+      bubble.textContent = text;
+    }
+
+    const time = document.createElement("span");
+    time.className   = "chat-time";
+    time.textContent = getTime();
+
+    msg.appendChild(bubble);
+    msg.appendChild(time);
+
+    // Slide-up entrance
+    msg.style.opacity   = "0";
+    msg.style.transform = "translateY(10px)";
+    messagesEl.appendChild(msg);
+
+    requestAnimationFrame(() => {
+      msg.style.transition = "opacity 0.3s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1)";
+      msg.style.opacity    = "1";
+      msg.style.transform  = "translateY(0)";
+    });
+
+    scrollToBottom();
+    return msg;
+  }
+
+  let typingCounter = 0;
+  function appendTyping() {
+    const id  = ++typingCounter;
+    const msg = document.createElement("div");
+    msg.className         = "chat-msg chat-msg-bot chat-typing";
+    msg.dataset.typingId  = id;
+
+    const bubble = document.createElement("div");
+    bubble.className = "chat-bubble";
+    for (let i = 0; i < 3; i++) {
+      const dot = document.createElement("span");
+      dot.className = "typing-dot";
+      bubble.appendChild(dot);
+    }
+
+    msg.appendChild(bubble);
+    messagesEl.appendChild(msg);
+    scrollToBottom();
+    return id;
+  }
+
+  function removeTyping(id) {
+    messagesEl.querySelector(`[data-typing-id="${id}"]`)?.remove();
+  }
+
+  function scrollToBottom() {
+    messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: "smooth" });
+  }
+
+})();
